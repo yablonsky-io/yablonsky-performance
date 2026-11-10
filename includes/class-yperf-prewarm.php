@@ -175,7 +175,7 @@ final class Prewarm
             $url,
             array(
                 'timeout'             => 8,
-                'redirection'         => 3,
+                'redirection'         => 0, // Keep prewarm confined to the verified same-origin URL.
                 'sslverify'           => true,
                 'limit_response_size' => 32768,
                 'user-agent'          => 'Yablonsky-Performance/' . YPERF_VERSION . ' Prewarm',
