@@ -57,6 +57,7 @@ jobs:
         run: test -f yablonsky-performance.php
       - name: Install WordPress coding standards
         run: |
+          composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
           composer global require --no-interaction squizlabs/php_codesniffer:^3.11 wp-coding-standards/wpcs:^3.2 dealerdirect/phpcodesniffer-composer-installer:^1.0
           echo "$HOME/.composer/vendor/bin" >> "$GITHUB_PATH"
           echo "$HOME/.config/composer/vendor/bin" >> "$GITHUB_PATH"
