@@ -1,0 +1,581 @@
+{
+  "changed": [
+    {
+      "language": "el",
+      "old": 0,
+      "new": 100.0
+    }
+  ],
+  "packs": [
+    {
+      "language": "en",
+      "locales": [
+        {
+          "locale": "en_US",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        },
+        {
+          "locale": "en_GB",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "source"
+    },
+    {
+      "language": "zh-CN",
+      "locales": [
+        {
+          "locale": "zh_CN",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "zh_SG",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "zh-TW",
+      "locales": [
+        {
+          "locale": "zh_TW",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "zh_HK",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "es",
+      "locales": [
+        {
+          "locale": "es_ES",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "es_MX",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "hi",
+      "locales": [
+        {
+          "locale": "hi_IN",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "ar",
+      "locales": [
+        {
+          "locale": "ar",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "pt",
+      "locales": [
+        {
+          "locale": "pt_PT",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "pt_BR",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "fr",
+      "locales": [
+        {
+          "locale": "fr_FR",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "bn",
+      "locales": [
+        {
+          "locale": "bn_BD",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "id",
+      "locales": [
+        {
+          "locale": "id_ID",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "ja",
+      "locales": [
+        {
+          "locale": "ja",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "ko",
+      "locales": [
+        {
+          "locale": "ko_KR",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "de",
+      "locales": [
+        {
+          "locale": "de_DE",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "ru",
+      "locales": [
+        {
+          "locale": "ru_RU",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "ur",
+      "locales": [
+        {
+          "locale": "ur",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "tr",
+      "locales": [
+        {
+          "locale": "tr_TR",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "it",
+      "locales": [
+        {
+          "locale": "it_IT",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "nl",
+      "locales": [
+        {
+          "locale": "nl_NL",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "pl",
+      "locales": [
+        {
+          "locale": "pl_PL",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "bg",
+      "locales": [
+        {
+          "locale": "bg_BG",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "hr",
+      "locales": [
+        {
+          "locale": "hr",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "cs",
+      "locales": [
+        {
+          "locale": "cs_CZ",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "da",
+      "locales": [
+        {
+          "locale": "da_DK",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "et",
+      "locales": [
+        {
+          "locale": "et",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "fi",
+      "locales": [
+        {
+          "locale": "fi",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "el",
+      "locales": [
+        {
+          "locale": "el",
+          "catalog_exists": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 100.0,
+      "status": "translated_pending_editorial"
+    },
+    {
+      "language": "hu",
+      "locales": [
+        {
+          "locale": "hu_HU",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "ga",
+      "locales": [
+        {
+          "locale": "ga",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "lv",
+      "locales": [
+        {
+          "locale": "lv",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "lt",
+      "locales": [
+        {
+          "locale": "lt_LT",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "mt",
+      "locales": [
+        {
+          "locale": "mt_MT",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "ro",
+      "locales": [
+        {
+          "locale": "ro_RO",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "sk",
+      "locales": [
+        {
+          "locale": "sk_SK",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "sl",
+      "locales": [
+        {
+          "locale": "sl_SI",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "sv",
+      "locales": [
+        {
+          "locale": "sv_SE",
+          "catalog_exists": false,
+          "filled": 0,
+          "total": 2206,
+          "coverage_percent": 0
+        }
+      ],
+      "coverage_percent": 0,
+      "status": "not_started"
+    },
+    {
+      "language": "uk",
+      "locales": [
+        {
+          "locale": "uk",
+          "catalog_exists": true,
+          "filled": 984,
+          "total": 2206,
+          "coverage_percent": 44.61,
+          "fuzzy": 0
+        }
+      ],
+      "coverage_percent": 44.61,
+      "status": "partial"
+    }
+  ]
+}

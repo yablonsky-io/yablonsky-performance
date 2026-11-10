@@ -1,0 +1,491 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Yablonsky Performance Host Inspector 2.0.0
+ *
+ * Read-only CLI helper. It collects a secret-redacted host snapshot for
+ * import into Yablonsky Performance. It does not edit configuration, restart
+ * services, install packages, scan Redis keys, or export raw configuration.
+ */
+
+declare(strict_types=1);
+
+if (PHP_SAPI !== 'cli') {
+    http_response_code(404);
+    exit;
+}
+
+const YPERF_HOST_INSPECTOR_VERSION = '2.0.0';
+const YPERF_HOST_SCHEMA = 6;
+
+function yperf_fail(string $message, int $code = 1): void
+{
+    fwrite(STDERR, "YPerf Host Inspector: {$message}\n");
+    exit($code);
+}
+
+/** @return array{stdout:string,stderr:string,code:int} */
+function yperf_run(array $argv, int $timeoutSeconds = 8): array
+{
+    $command = implode(' ', array_map('escapeshellarg', $argv));
+    $spec = array(1 => array('pipe', 'w'), 2 => array('pipe', 'w'));
+    $process = @proc_open($command, $spec, $pipes, null, array('LC_ALL' => 'C', 'LANG' => 'C'));
+    if (!is_resource($process)) {
+        return array('stdout' => '', 'stderr' => 'proc_open failed', 'code' => 127);
+    }
+    stream_set_blocking($pipes[1], false);
+    stream_set_blocking($pipes[2], false);
+    $stdout = '';
+    $stderr = '';
+    $started = microtime(true);
+    while (true) {
+        $stdout .= (string) stream_get_contents($pipes[1]);
+        $stderr .= (string) stream_get_contents($pipes[2]);
+        $status = proc_get_status($process);
+        if (!$status['running']) {
+            break;
+        }
+        if ((microtime(true) - $started) > $timeoutSeconds) {
+            proc_terminate($process, 15);
+            usleep(100000);
+            $status = proc_get_status($process);
+            if ($status['running']) {
+                proc_terminate($process, 9);
+            }
+            break;
+        }
+        usleep(25000);
+    }
+    $stdout .= (string) stream_get_contents($pipes[1]);
+    $stderr .= (string) stream_get_contents($pipes[2]);
+    fclose($pipes[1]);
+    fclose($pipes[2]);
+    $code = proc_close($process);
+    return array('stdout' => trim($stdout), 'stderr' => trim($stderr), 'code' => (int) $code);
+}
+
+function yperf_bool_command(array $argv): bool
+{
+    $result = yperf_run($argv, 4);
+    return $result['code'] === 0;
+}
+
+function yperf_service_active(string $unit): bool
+{
+    $result = yperf_run(array('systemctl', 'is-active', '--quiet', $unit), 4);
+    return $result['code'] === 0;
+}
+
+function yperf_read_text(string $path, int $maxBytes = 262144): string
+{
+    if (!is_readable($path) || !is_file($path)) {
+        return '';
+    }
+    $size = @filesize($path);
+    if (is_int($size) && $size > $maxBytes) {
+        return '';
+    }
+    $data = @file_get_contents($path);
+    return is_string($data) ? $data : '';
+}
+
+/** @return array<string,string> */
+function yperf_parse_os_release(): array
+{
+    $raw = yperf_read_text('/etc/os-release', 32768);
+    $out = array();
+    foreach (preg_split('/\R/', $raw) ?: array() as $line) {
+        if (strpos($line, '=') === false) {
+            continue;
+        }
+        [$key, $value] = explode('=', $line, 2);
+        $key = trim($key);
+        $value = trim($value, " \t\n\r\0\x0B\"'");
+        if (in_array($key, array('ID', 'VERSION_ID', 'PRETTY_NAME'), true)) {
+            $out[$key] = $value;
+        }
+    }
+    return $out;
+}
+
+/** @return array<string,float> */
+function yperf_memory(): array
+{
+    $raw = yperf_read_text('/proc/meminfo', 65536);
+    $values = array();
+    foreach (preg_split('/\R/', $raw) ?: array() as $line) {
+        if (preg_match('/^([A-Za-z_()]+):\s+(\d+)\s+kB$/', trim($line), $m) === 1) {
+            $values[$m[1]] = ((float) $m[2]) / 1024.0;
+        }
+    }
+    return array(
+        'total_mb' => round((float) ($values['MemTotal'] ?? 0), 1),
+        'available_mb' => round((float) ($values['MemAvailable'] ?? 0), 1),
+    );
+}
+
+/** @return array<int,string> */
+function yperf_nginx_server_blocks(string $config): array
+{
+    $blocks = array();
+    $offset = 0;
+    $length = strlen($config);
+    while ($offset < $length && preg_match('/\bserver\s*\{/i', $config, $m, PREG_OFFSET_CAPTURE, $offset) === 1) {
+        $start = (int) $m[0][1];
+        $brace = strpos($config, '{', $start);
+        if ($brace === false) {
+            break;
+        }
+        $depth = 0;
+        $end = null;
+        for ($i = $brace; $i < $length; ++$i) {
+            if ($config[$i] === '{') { ++$depth; }
+            elseif ($config[$i] === '}') {
+                --$depth;
+                if ($depth === 0) { $end = $i; break; }
+            }
+        }
+        if ($end === null) {
+            break;
+        }
+        $blocks[] = substr($config, $start, $end - $start + 1);
+        $offset = $end + 1;
+    }
+    return $blocks;
+}
+
+/** @return array<int,string> */
+function yperf_server_names(string $block): array
+{
+    $names = array();
+    if (preg_match_all('/\bserver_name\s+([^;]+);/i', $block, $matches)) {
+        foreach ($matches[1] as $group) {
+            foreach (preg_split('/\s+/', trim((string) $group)) ?: array() as $name) {
+                $name = strtolower(trim($name));
+                if ($name !== '' && $name !== '_') { $names[$name] = $name; }
+            }
+        }
+    }
+    return array_values($names);
+}
+
+function yperf_host_matches(string $candidate, string $target): bool
+{
+    $candidate = strtolower(trim($candidate));
+    $target = strtolower(trim($target));
+    if ($candidate === $target) { return true; }
+    if (strpos($candidate, '*.') === 0) {
+        $suffix = substr($candidate, 1);
+        return $suffix !== '' && substr($target, -strlen($suffix)) === $suffix;
+    }
+    return false;
+}
+
+/** @return array<string,string> */
+function yperf_parse_fpm_pool(string $path): array
+{
+    $raw = yperf_read_text($path, 262144);
+    if ($raw === '') { return array(); }
+    $out = array('name' => basename($path, '.conf'));
+    foreach (preg_split('/\R/', $raw) ?: array() as $line) {
+        $line = trim(preg_replace('/\s*[;#].*$/', '', $line) ?? '');
+        if ($line === '' || strpos($line, '=') === false) { continue; }
+        [$key, $value] = array_map('trim', explode('=', $line, 2));
+        if (in_array($key, array('listen', 'pm', 'pm.max_children', 'pm.max_requests', 'php_admin_value[memory_limit]', 'php_value[memory_limit]'), true)) {
+            $out[$key] = $value;
+        }
+    }
+    return $out;
+}
+
+/** @return array{count:int,avg:float,max:float} */
+function yperf_fpm_rss(string $pool): array
+{
+    if ($pool === '') { return array('count' => 0, 'avg' => 0.0, 'max' => 0.0); }
+    $result = yperf_run(array('ps', '-eo', 'rss=,args='), 5);
+    $values = array();
+    foreach (preg_split('/\R/', $result['stdout']) ?: array() as $line) {
+        if (stripos($line, 'php-fpm: pool ' . $pool) === false) { continue; }
+        if (preg_match('/^\s*(\d+)\s+/', $line, $m) === 1) {
+            $values[] = ((float) $m[1]) / 1024.0;
+        }
+    }
+    if ($values === array()) { return array('count' => 0, 'avg' => 0.0, 'max' => 0.0); }
+    return array('count' => count($values), 'avg' => round(array_sum($values) / count($values), 1), 'max' => round(max($values), 1));
+}
+
+/** @return array<string,mixed> */
+function yperf_redis(): array
+{
+    $base = array(
+        'installed' => yperf_bool_command(array('sh', '-c', 'command -v redis-cli >/dev/null 2>&1')),
+        'reachable' => false,
+    );
+    if (!$base['installed']) { return $base; }
+    $ping = yperf_run(array('redis-cli', '-h', '127.0.0.1', '-p', '6379', '--no-auth-warning', 'PING'), 4);
+    if (strtoupper(trim($ping['stdout'])) !== 'PONG') { return $base; }
+    $base['reachable'] = true;
+    $info = yperf_run(array('redis-cli', '-h', '127.0.0.1', '-p', '6379', '--no-auth-warning', 'INFO'), 5)['stdout'];
+    $cfg = yperf_run(array('redis-cli', '-h', '127.0.0.1', '-p', '6379', '--no-auth-warning', 'CONFIG', 'GET', 'maxmemory', 'maxmemory-policy', 'appendonly', 'databases'), 5)['stdout'];
+    $map = array();
+    foreach (preg_split('/\R/', $info) ?: array() as $line) {
+        if (strpos($line, ':') === false || strpos($line, '#') === 0) { continue; }
+        [$key, $value] = explode(':', trim($line), 2);
+        $map[$key] = trim($value);
+    }
+    $cfgLines = array_values(array_filter(preg_split('/\R/', $cfg) ?: array(), static fn($v) => trim((string) $v) !== ''));
+    $config = array();
+    for ($i = 0; $i + 1 < count($cfgLines); $i += 2) { $config[trim($cfgLines[$i])] = trim($cfgLines[$i + 1]); }
+    $logical = max(1, (int) ($config['databases'] ?? 16));
+    $nonempty = array();
+    $keysTotal = 0;
+    foreach ($map as $key => $value) {
+        if (preg_match('/^db(\d+)$/', $key, $m) !== 1) { continue; }
+        if (preg_match('/keys=(\d+)/', $value, $km) !== 1) { continue; }
+        $db = (int) $m[1];
+        $keys = (int) $km[1];
+        if ($keys > 0) { $nonempty[] = $db; $keysTotal += $keys; }
+    }
+    $firstEmpty = null;
+    for ($db = 0; $db < $logical; ++$db) {
+        if (!in_array($db, $nonempty, true)) { $firstEmpty = $db; break; }
+    }
+    $maxmemory = (int) ($config['maxmemory'] ?? 0);
+    return array(
+        'installed' => true,
+        'reachable' => true,
+        'version' => (string) ($map['redis_version'] ?? ''),
+        'role' => (string) ($map['role'] ?? ''),
+        'uptime_seconds' => (int) ($map['uptime_in_seconds'] ?? 0),
+        'connected_clients' => (int) ($map['connected_clients'] ?? 0),
+        'used_memory_mb' => round(((float) ($map['used_memory'] ?? 0)) / 1048576.0, 1),
+        'used_memory_rss_mb' => round(((float) ($map['used_memory_rss'] ?? 0)) / 1048576.0, 1),
+        'maxmemory_mb' => round($maxmemory / 1048576.0, 1),
+        'maxmemory_policy' => (string) ($config['maxmemory-policy'] ?? ''),
+        'evicted_keys' => (int) ($map['evicted_keys'] ?? 0),
+        'keyspace_hits' => (int) ($map['keyspace_hits'] ?? 0),
+        'keyspace_misses' => (int) ($map['keyspace_misses'] ?? 0),
+        'appendonly' => strtolower((string) ($config['appendonly'] ?? 'no')) === 'yes',
+        'mem_fragmentation_ratio' => (float) ($map['mem_fragmentation_ratio'] ?? 0),
+        'instantaneous_ops_per_sec' => (int) ($map['instantaneous_ops_per_sec'] ?? 0),
+        'rejected_connections' => (int) ($map['rejected_connections'] ?? 0),
+        'logical_databases' => $logical,
+        'keyspace_nonempty_databases' => count($nonempty),
+        'keyspace_total_keys' => $keysTotal,
+        'first_empty_database' => $firstEmpty,
+    );
+}
+
+/** @return array<string,mixed> */
+function yperf_probe(string $host): array
+{
+    $url = 'https://' . $host . '/';
+    $result = yperf_run(array('curl', '--silent', '--show-error', '--location', '--max-redirs', '2', '--connect-timeout', '4', '--max-time', '8', '--output', '/dev/null', '--dump-header', '-', '--user-agent', 'YPerf-Host-Inspector/' . YPERF_HOST_INSPECTOR_VERSION, $url), 10);
+    $headers = array();
+    $code = 0;
+    foreach (preg_split('/\R/', $result['stdout']) ?: array() as $line) {
+        $line = trim($line);
+        if (preg_match('#^HTTP/\S+\s+(\d+)#i', $line, $m) === 1) { $code = (int) $m[1]; $headers = array(); continue; }
+        if (strpos($line, ':') === false) { continue; }
+        [$name, $value] = explode(':', $line, 2);
+        $name = strtolower(trim($name));
+        if (in_array($name, array('x-yperf-cache', 'x-cache', 'x-fastcgi-cache', 'cf-cache-status', 'set-cookie', 'cache-control'), true)) {
+            $headers[$name] = $name === 'set-cookie' ? 'present' : trim($value);
+        }
+    }
+    return array('http_code' => $code, 'headers' => $headers, 'ok' => $code >= 200 && $code < 500);
+}
+
+$options = getopt('', array('host:', 'output::', 'help'));
+if (isset($options['help'])) {
+    fwrite(STDOUT, "Usage: sudo php yperf-host-inspector.php --host=example.com [--output=yperf-host-snapshot.json]\n");
+    exit(0);
+}
+$targetHost = strtolower(trim((string) ($options['host'] ?? '')));
+if ($targetHost === '' || strlen($targetHost) > 253 || preg_match('/^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)*[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?$/i', $targetHost) !== 1) {
+    yperf_fail('Provide a valid --host value, for example --host=example.com.');
+}
+$output = trim((string) ($options['output'] ?? 'yperf-host-snapshot.json'));
+if ($output === '' || strpos($output, "\0") !== false) { yperf_fail('Invalid output path.'); }
+
+$os = yperf_parse_os_release();
+$memory = yperf_memory();
+$load = sys_getloadavg();
+$cpu = yperf_run(array('nproc'), 3);
+$diskTotal = @disk_total_space('/');
+$diskFree = @disk_free_space('/');
+
+$nginxVersionRaw = yperf_run(array('nginx', '-v'), 4);
+$nginxTest = yperf_run(array('nginx', '-t'), 6);
+$nginxDump = yperf_run(array('nginx', '-T'), 8);
+$config = $nginxDump['stdout'] . "\n" . $nginxDump['stderr'];
+$nginxInstalled = $nginxVersionRaw['code'] === 0 || stripos($nginxVersionRaw['stderr'], 'nginx version') !== false;
+$nginxVersion = '';
+if (preg_match('#nginx version:\s*nginx/([^\s]+)#i', $nginxVersionRaw['stderr'] . ' ' . $nginxVersionRaw['stdout'], $m) === 1) { $nginxVersion = $m[1]; }
+
+$serverBlocks = yperf_nginx_server_blocks($config);
+$matchingBlocks = array();
+foreach ($serverBlocks as $block) {
+    foreach (yperf_server_names($block) as $name) {
+        if (yperf_host_matches($name, $targetHost)) { $matchingBlocks[] = $block; break; }
+    }
+}
+$targetBlock = $matchingBlocks[0] ?? '';
+$cacheZone = '';
+$fastcgiPass = '';
+$keyExpression = '';
+if ($targetBlock !== '') {
+    if (preg_match('/\bfastcgi_cache\s+([^;\s]+)\s*;/i', $targetBlock, $m) === 1) { $cacheZone = trim($m[1]); }
+    if (preg_match('/\bfastcgi_pass\s+([^;]+);/i', $targetBlock, $m) === 1) { $fastcgiPass = trim($m[1]); }
+    if (preg_match('/\bfastcgi_cache_key\s+([^;]+);/i', $targetBlock, $m) === 1) { $keyExpression = trim($m[1]); }
+}
+$zoneOwners = array();
+if ($cacheZone !== '') {
+    foreach ($serverBlocks as $block) {
+        if (preg_match('/\bfastcgi_cache\s+' . preg_quote($cacheZone, '/') . '\s*;/i', $block) !== 1) { continue; }
+        foreach (yperf_server_names($block) as $name) { $zoneOwners[$name] = $name; }
+    }
+}
+sort($zoneOwners);
+$zonePath = '';
+if ($cacheZone !== '' && preg_match('/\bfastcgi_cache_path\s+([^;]+)\bkeys_zone=' . preg_quote($cacheZone, '/') . ':[^;]+;/i', $config, $m) === 1) {
+    $parts = preg_split('/\s+/', trim($m[1])) ?: array();
+    $zonePath = (string) ($parts[0] ?? '');
+}
+
+$pools = array();
+foreach (glob('/etc/php/*/fpm/pool.d/*.conf') ?: array() as $poolFile) {
+    $parsed = yperf_parse_fpm_pool($poolFile);
+    if ($parsed !== array()) { $pools[] = $parsed; }
+}
+$matchedPool = array();
+foreach ($pools as $pool) {
+    $listen = (string) ($pool['listen'] ?? '');
+    if ($listen !== '' && $fastcgiPass !== '' && (strpos($fastcgiPass, $listen) !== false || strpos($listen, trim(str_replace('unix:', '', $fastcgiPass))) !== false)) {
+        $matchedPool = $pool; break;
+    }
+}
+if ($matchedPool === array() && count($pools) === 1) { $matchedPool = $pools[0]; }
+$rss = yperf_fpm_rss((string) ($matchedPool['name'] ?? ''));
+$maxChildren = array_map(static fn(array $p): int => (int) ($p['pm.max_children'] ?? 0), $pools);
+$maxRequests = array_map(static fn(array $p): int => (int) ($p['pm.max_requests'] ?? 0), $pools);
+$pmCounts = array_count_values(array_map(static fn(array $p): string => (string) ($p['pm'] ?? ''), $pools));
+
+$probe1 = yperf_probe($targetHost);
+usleep(150000);
+$probe2 = yperf_probe($targetHost);
+$cacheHeaderName = '';
+$cacheValue1 = '';
+$cacheValue2 = '';
+foreach (array('x-yperf-cache', 'x-cache', 'x-fastcgi-cache', 'cf-cache-status') as $header) {
+    if (isset($probe1['headers'][$header]) || isset($probe2['headers'][$header])) {
+        $cacheHeaderName = $header;
+        $cacheValue1 = (string) ($probe1['headers'][$header] ?? '');
+        $cacheValue2 = (string) ($probe2['headers'][$header] ?? '');
+        break;
+    }
+}
+
+$snapshot = array(
+    'schema' => YPERF_HOST_SCHEMA,
+    'helper' => 'yablonsky-performance-host-inspector',
+    'helper_version' => YPERF_HOST_INSPECTOR_VERSION,
+    'generated_at' => time(),
+    'read_only' => true,
+    'host' => array(
+        'os' => (string) ($os['PRETTY_NAME'] ?? ($os['ID'] ?? PHP_OS_FAMILY)),
+        'kernel' => php_uname('r'),
+        'cpu_threads' => max(0, (int) trim($cpu['stdout'])),
+        'memory_total_mb' => $memory['total_mb'],
+        'memory_available_mb' => $memory['available_mb'],
+        'load_1' => (float) ($load[0] ?? 0),
+        'load_5' => (float) ($load[1] ?? 0),
+        'load_15' => (float) ($load[2] ?? 0),
+        'disk_total_mb' => is_float($diskTotal) ? round($diskTotal / 1048576.0, 1) : 0,
+        'disk_available_mb' => is_float($diskFree) ? round($diskFree / 1048576.0, 1) : 0,
+    ),
+    'nginx' => array(
+        'installed' => $nginxInstalled,
+        'version' => $nginxVersion,
+        'service_active' => yperf_service_active('nginx'),
+        'syntax_ok' => $nginxTest['code'] === 0,
+        'fastcgi_cache_paths' => preg_match_all('/\bfastcgi_cache_path\b/i', $config),
+        'fastcgi_cache_uses' => preg_match_all('/\bfastcgi_cache\s+[^;]+;/i', $config),
+        'proxy_cache_paths' => preg_match_all('/\bproxy_cache_path\b/i', $config),
+        'gzip_enabled' => preg_match('/\bgzip\s+on\s*;/i', $config) === 1,
+        'brotli_enabled' => preg_match('/\bbrotli\s+on\s*;/i', $config) === 1,
+    ),
+    'php_fpm' => array(
+        'installed' => $pools !== array(),
+        'service_active' => yperf_bool_command(array('sh', '-c', 'systemctl is-active --quiet php*-fpm 2>/dev/null || pgrep -f "php-fpm: master" >/dev/null 2>&1')),
+        'pool_count' => count($pools),
+        'dynamic_pools' => (int) ($pmCounts['dynamic'] ?? 0),
+        'ondemand_pools' => (int) ($pmCounts['ondemand'] ?? 0),
+        'static_pools' => (int) ($pmCounts['static'] ?? 0),
+        'max_children_total' => array_sum($maxChildren),
+        'max_children_min' => $maxChildren !== array() ? min($maxChildren) : 0,
+        'max_children_max' => $maxChildren !== array() ? max($maxChildren) : 0,
+        'max_requests_max' => $maxRequests !== array() ? max($maxRequests) : 0,
+        'site_pool_name' => (string) ($matchedPool['name'] ?? ''),
+        'site_pool_pm' => (string) ($matchedPool['pm'] ?? ''),
+        'site_pool_max_children' => (int) ($matchedPool['pm.max_children'] ?? 0),
+        'site_pool_max_requests' => (int) ($matchedPool['pm.max_requests'] ?? 0),
+        'site_pool_memory_limit' => (string) ($matchedPool['php_admin_value[memory_limit]'] ?? ($matchedPool['php_value[memory_limit]'] ?? '')),
+        'site_pool_current_processes' => $rss['count'],
+        'site_pool_avg_rss_mb' => $rss['avg'],
+        'site_pool_max_rss_mb' => $rss['max'],
+    ),
+    'redis' => yperf_redis(),
+    'memcached' => array(
+        'installed' => yperf_bool_command(array('sh', '-c', 'command -v memcached >/dev/null 2>&1')),
+        'service_active' => yperf_service_active('memcached'),
+        'reachable' => false,
+        'version' => '',
+    ),
+    'database' => array(
+        'mariadb_service_active' => yperf_service_active('mariadb'),
+        'mysql_service_active' => yperf_service_active('mysql'),
+    ),
+    'site_runtime' => array(
+        'target_host' => $targetHost,
+        'nginx_matching_server_blocks' => count($matchingBlocks),
+        'fastcgi_cache_directives' => $targetBlock !== '' ? preg_match_all('/\bfastcgi_cache\s+[^;]+;/i', $targetBlock) : 0,
+        'fastcgi_cache_bypass_directives' => $targetBlock !== '' ? preg_match_all('/\bfastcgi_cache_bypass\s+[^;]+;/i', $targetBlock) : 0,
+        'fastcgi_no_cache_directives' => $targetBlock !== '' ? preg_match_all('/\bfastcgi_no_cache\s+[^;]+;/i', $targetBlock) : 0,
+        'fastcgi_cache_purge_directives' => $targetBlock !== '' ? preg_match_all('/\bfastcgi_cache_purge\s+[^;]+;/i', $targetBlock) : 0,
+        'fastcgi_cache_zone' => $cacheZone,
+        'cache_status_header_name' => $cacheHeaderName,
+        'cache_status_header_exposed' => $cacheHeaderName !== '',
+        'cache_zone_owner_blocks' => count($zoneOwners),
+        'cache_zone_owner_signature' => $zoneOwners !== array() ? hash('sha256', implode('|', $zoneOwners)) : '',
+        'cache_zone_target_owner' => in_array($targetHost, $zoneOwners, true),
+        'cache_zone_definition_count' => $cacheZone !== '' ? preg_match_all('/\bkeys_zone=' . preg_quote($cacheZone, '/') . ':/i', $config) : 0,
+        'cache_zone_path_hash' => $zonePath !== '' ? hash('sha256', $zonePath) : '',
+        'cache_zone_path_basename' => $zonePath !== '' ? basename(rtrim($zonePath, '/')) : '',
+        'fastcgi_cache_key_expression' => $keyExpression !== '' ? preg_replace('/\s+/', ' ', $keyExpression) : '',
+        'fastcgi_cache_key_host_scoped' => $keyExpression !== '' && (strpos($keyExpression, '$host') !== false || strpos($keyExpression, '$server_name') !== false),
+        'fastcgi_pass_kind' => strpos($fastcgiPass, 'unix:') === 0 ? 'unix' : ($fastcgiPass !== '' ? 'network' : ''),
+        'fastcgi_pass_target' => $fastcgiPass !== '' ? hash('sha256', $fastcgiPass) : '',
+        'matched_fpm_pool' => (string) ($matchedPool['name'] ?? ''),
+        'probe_performed' => true,
+        'probe_https_reachable' => !empty($probe2['ok']),
+        'probe1_http_code' => (int) ($probe1['http_code'] ?? 0),
+        'probe1_ms' => 0,
+        'probe1_cache_header' => $cacheHeaderName,
+        'probe1_cache_value' => $cacheValue1,
+        'probe1_set_cookie' => isset($probe1['headers']['set-cookie']) ? 'present' : 'absent',
+        'probe1_cache_control' => (string) ($probe1['headers']['cache-control'] ?? ''),
+        'probe2_http_code' => (int) ($probe2['http_code'] ?? 0),
+        'probe2_ms' => 0,
+        'probe2_cache_header' => $cacheHeaderName,
+        'probe2_cache_value' => $cacheValue2,
+        'probe2_set_cookie' => isset($probe2['headers']['set-cookie']) ? 'present' : 'absent',
+        'probe2_cache_control' => (string) ($probe2['headers']['cache-control'] ?? ''),
+    ),
+);
+
+$json = json_encode($snapshot, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
+if (!is_string($json)) { yperf_fail('Could not encode snapshot JSON.'); }
+if (@file_put_contents($output, $json . "\n", LOCK_EX) === false) { yperf_fail('Could not write output file: ' . $output); }
+@chmod($output, 0600);
+fwrite(STDOUT, "YPerf Host Inspector complete.\nSnapshot: {$output}\nRead-only: yes\nTarget host: {$targetHost}\nImport this JSON in WordPress → Yablonsky Performance → Setup → Environment → Host Intelligence.\n");

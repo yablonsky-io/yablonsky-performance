@@ -1,0 +1,35 @@
+/* Media delivery stylesheet for supported YouTube embeds in public or canary mode */
+.yperf-video-lite{position:relative;display:block;width:100%;max-width:100%;overflow:hidden;background:#10131a;border-radius:2px}
+.yperf-video-lite-trigger{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;color:#fff!important;text-decoration:none!important;background:#10131a}
+.yperf-video-lite-trigger img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.75)}
+.yperf-video-lite-play{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;width:68px;height:48px;border-radius:14px;background:#e62117;color:white;font-size:25px;box-shadow:0 2px 14px rgba(0,0,0,.35)}
+.yperf-video-lite-trigger:hover .yperf-video-lite-play,.yperf-video-lite-trigger:focus-visible .yperf-video-lite-play{background:#c11209}
+.yperf-video-lite-trigger:focus-visible{outline:3px solid #fff;outline-offset:-5px}
+.yperf-video-lite iframe{display:block;width:100%;height:100%;border:0}
+@media(prefers-reduced-motion:reduce){.yperf-video-lite-trigger *{transition:none!important}}
+
+/* Gutenberg core aspect-ratio embeds already reserve their own height with
+ * .wp-block-embed__wrapper::before. A second in-flow aspect box would double
+ * the reserved height and trigger large layout shifts. Overlay instead. */
+.wp-block-embed.wp-has-aspect-ratio .wp-block-embed__wrapper>.yperf-video-lite{
+ position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto!important;
+}
+/* When YouTube returns its generic 120x90 placeholder (or image fails),
+ * retain the content slot and point the visitor to the original YouTube URL. */
+.yperf-video-lite-no-thumb .yperf-video-lite-trigger img{display:none}
+.yperf-video-lite-missing-label{position:absolute;inset:0;display:flex;
+ flex-direction:column;align-items:center;justify-content:center;gap:10px;
+ padding:14px;color:#fff!important;text-align:center;font-size:14px;line-height:1.35;
+ background:#202632}
+.yperf-video-lite-missing-label strong{font-weight:600}
+.yperf-video-lite-no-thumb .yperf-video-lite-play{display:none}
+.yperf-video-lite-no-thumb .yperf-video-lite-trigger:focus-visible{
+ outline:3px solid #fff;outline-offset:-4px}
+
+/* Vimeo canary: local poster UI, no Vimeo JS or thumbnail request before click. */
+.yperf-video-lite-vimeo .yperf-video-lite-trigger{flex-direction:column;gap:12px;background:linear-gradient(135deg,#0b1722,#183f5a);color:#fff}
+.yperf-video-lite-vimeo .yperf-video-lite-play{background:#1ab7ea}
+.yperf-video-lite-vimeo .yperf-video-lite-trigger:hover .yperf-video-lite-play,
+.yperf-video-lite-vimeo .yperf-video-lite-trigger:focus-visible .yperf-video-lite-play{background:#087eae}
+.yperf-video-lite-vimeo-brand{font-weight:750;font-size:clamp(16px,2.2vw,23px);letter-spacing:-.025em}
+.yperf-video-lite-vimeo-caption{font-size:13px;font-weight:500}

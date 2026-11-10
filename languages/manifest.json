@@ -1,0 +1,1127 @@
+{
+  "schema": 3,
+  "product": "Yablonsky Performance",
+  "version": "2.56.0",
+  "source_locale": "en_US",
+  "language_scope": {
+    "languages": 36,
+    "locale_variants": 41,
+    "rule": "Yablonsky family canon: 36 first-class language families; Simplified and Traditional Chinese are distinct families; regional WordPress locales remain variants."
+  },
+  "current_gettext_keys": 2206,
+  "packs": [
+    {
+      "language": "en",
+      "name": "English",
+      "native": "English",
+      "locales": [
+        "en_US",
+        "en_GB"
+      ],
+      "status": "source",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "en_US",
+          "catalog_exists": false,
+          "source_reference": true,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "en_GB",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206
+    },
+    {
+      "language": "zh-CN",
+      "name": "Chinese (Simplified)",
+      "native": "简体中文",
+      "locales": [
+        "zh_CN",
+        "zh_SG"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "zh_CN",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "zh_SG",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "zh-TW",
+      "name": "Chinese (Traditional)",
+      "native": "繁體中文",
+      "locales": [
+        "zh_TW",
+        "zh_HK"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "zh_TW",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "zh_HK",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "es",
+      "name": "Spanish",
+      "native": "Español",
+      "locales": [
+        "es_ES",
+        "es_MX"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "es_ES",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "es_MX",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "hi",
+      "name": "Hindi",
+      "native": "हिन्दी",
+      "locales": [
+        "hi_IN"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "hi_IN",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ar",
+      "name": "Arabic",
+      "native": "العربية",
+      "locales": [
+        "ar"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "ar",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "pt",
+      "name": "Portuguese",
+      "native": "Português",
+      "locales": [
+        "pt_PT",
+        "pt_BR"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "pt_PT",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        },
+        {
+          "locale": "pt_BR",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "fr",
+      "name": "French",
+      "native": "Français",
+      "locales": [
+        "fr_FR"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "fr_FR",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "bn",
+      "name": "Bengali",
+      "native": "বাংলা",
+      "locales": [
+        "bn_BD"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Source-filled; native editorial and WordPress browser acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "bn_BD",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "id",
+      "name": "Indonesian",
+      "native": "Bahasa Indonesia",
+      "locales": [
+        "id_ID"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "FULL SOURCE FILL; independent Indonesian editorial and WordPress browser QA pending.",
+      "locale_audit": [
+        {
+          "locale": "id_ID",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ja",
+      "name": "Japanese",
+      "native": "日本語",
+      "locales": [
+        "ja"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Independently authored full Japanese source fill; editorial and WordPress UI acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "ja",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ko",
+      "name": "Korean",
+      "native": "한국어",
+      "locales": [
+        "ko_KR"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Independently authored Korean source-fill; native editor and WordPress visual acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "ko_KR",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "de",
+      "name": "German",
+      "native": "Deutsch",
+      "locales": [
+        "de_DE"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Full independent German source fill; native-language editor and WordPress UI QA pending.",
+      "locale_audit": [
+        {
+          "locale": "de_DE",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ru",
+      "name": "Russian",
+      "native": "Русский",
+      "locales": [
+        "ru_RU"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "ru_RU",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ur",
+      "name": "Urdu",
+      "native": "اردو",
+      "locales": [
+        "ur"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "rtl_visual_acceptance": "PENDING",
+      "coverage_note": "Full manually authored source-fill; independent Urdu linguistic/RTL WordPress UI acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "ur",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "tr",
+      "name": "Turkish",
+      "native": "Türkçe",
+      "locales": [
+        "tr_TR"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Full Turkish source fill; native editorial and WordPress UI QA pending.",
+      "locale_audit": [
+        {
+          "locale": "tr_TR",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "it",
+      "name": "Italian",
+      "native": "Italiano",
+      "locales": [
+        "it_IT"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "source_key_count": 2206,
+      "wordpress_visual_acceptance": "PENDING",
+      "coverage_note": "Full manually authored Italian source fill. Native editorial and WordPress UI acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "it_IT",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ]
+    },
+    {
+      "language": "nl",
+      "name": "Dutch",
+      "native": "Nederlands",
+      "locales": [
+        "nl_NL"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "locale_audit": [
+        {
+          "locale": "nl_NL",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "pl",
+      "name": "Polish",
+      "native": "Polski",
+      "locales": [
+        "pl_PL"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING",
+      "coverage_note": "Full Polish source-fill; token and gettext structure QA passed. Independent native editorial and WordPress UI acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "pl_PL",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ]
+    },
+    {
+      "language": "bg",
+      "name": "Bulgarian",
+      "native": "Български",
+      "locales": [
+        "bg_BG"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Full Bulgarian source fill; independent Bulgarian editorial and WordPress UI acceptance pending.",
+      "locale_audit": [
+        {
+          "locale": "bg_BG",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "hr",
+      "name": "Croatian",
+      "native": "Hrvatski",
+      "locales": [
+        "hr"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "hr",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "cs",
+      "name": "Czech",
+      "native": "Čeština",
+      "locales": [
+        "cs_CZ"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "cs_CZ",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "da",
+      "name": "Danish",
+      "native": "Dansk",
+      "locales": [
+        "da_DK"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_browser_acceptance": "PENDING",
+      "coverage_note": "Full Danish translations directly from English. Placeholder and compilation QA passed; independent native editorial and WordPress browser QA pending.",
+      "locale_audit": [
+        {
+          "locale": "da_DK",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "et",
+      "name": "Estonian",
+      "native": "Eesti",
+      "locales": [
+        "et"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_browser_acceptance": "PENDING",
+      "coverage_note": "Full independent Estonian source translation, manual authoring from English. PO/MO and placeholder QA passed; native editorial and WordPress browser checks pending.",
+      "locale_audit": [
+        {
+          "locale": "et",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "fi",
+      "name": "Finnish",
+      "native": "Suomi",
+      "locales": [
+        "fi"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "source_filled_count": 2206,
+      "source_key_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "coverage_note": "Fully translated from English reference; independent native-editor and WordPress UI QA pending.",
+      "locale_audit": [
+        {
+          "locale": "fi",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "el",
+      "name": "Greek",
+      "native": "Ελληνικά",
+      "locales": [
+        "el"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "el",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "hu",
+      "name": "Hungarian",
+      "native": "Magyar",
+      "locales": [
+        "hu_HU"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "hu_HU",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "coverage_note": "All English keys translated into Hungarian; technical checks passed. Independent native-editor and WordPress UI review pending.",
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ga",
+      "name": "Irish",
+      "native": "Gaeilge",
+      "locales": [
+        "ga"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "ga",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "coverage_note": "Irish content translated for every key; PO/MO, source parity and format integrity checked. Independent native editorial and WordPress visual review pending.",
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "lv",
+      "name": "Latvian",
+      "native": "Latviešu",
+      "locales": [
+        "lv"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "lv",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "coverage_note": "Full Latvian translation authored from English POT; structural QA passed; editorial and WordPress runtime QA pending.",
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "lt",
+      "name": "Lithuanian",
+      "native": "Lietuvių",
+      "locales": [
+        "lt_LT"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "lt_LT",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "coverage_note": "2206 authored Lithuanian translations based on English POT. Structural/token QA and MO roundtrip PASS; independent native-speaker editorial and WordPress runtime QA pending.",
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "mt",
+      "name": "Maltese",
+      "native": "Malti",
+      "locales": [
+        "mt_MT"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "mt_MT",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "coverage_note": "All 2206 Maltese msgids authored from English POT, technical format/PO/MO checks PASS; native-editorial and WordPress UI acceptance PENDING.",
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "ro",
+      "name": "Romanian",
+      "native": "Română",
+      "locales": [
+        "ro_RO"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "ro_RO",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "sk",
+      "name": "Slovak",
+      "native": "Slovenčina",
+      "locales": [
+        "sk_SK"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "sk_SK",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "sl",
+      "name": "Slovenian",
+      "native": "Slovenščina",
+      "locales": [
+        "sl_SI"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "sl_SI",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING",
+      "qa_note": "Machine-assisted Slovenian localization with Croatian translation-memory pivot; source-filled and technically checked. Native editorial review remains required before production acceptance."
+    },
+    {
+      "language": "sv",
+      "name": "Swedish",
+      "native": "Svenska",
+      "locales": [
+        "sv_SE"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "sv_SE",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    },
+    {
+      "language": "uk",
+      "name": "Ukrainian",
+      "native": "Українська",
+      "locales": [
+        "uk"
+      ],
+      "status": "translated_pending_editorial",
+      "coverage_percent": 100.0,
+      "locale_audit": [
+        {
+          "locale": "uk",
+          "catalog_exists": true,
+          "source_reference": false,
+          "filled": 2206,
+          "total": 2206,
+          "coverage_percent": 100.0,
+          "fuzzy": 0
+        }
+      ],
+      "source_key_count": 2206,
+      "source_filled_count": 2206,
+      "editorial_acceptance": "PENDING",
+      "wordpress_visual_acceptance": "PENDING"
+    }
+  ],
+  "quality_gate": "Regional source-filled PO/MO drafts are not independent native-editorial acceptance; all locales require browser QA, including RTL; 36 families and 41 locales release target unchanged.",
+  "note": "All 36 language families and 41 locale variants have complete source-filled gettext catalogs (2,206 keys each). This is CONTENT COVERAGE, not release acceptance. Native editorial and WordPress visual/RTL verification remain pending; inherited regional variants must also receive native terminology review.",
+  "admin_layout_contract": "market-control-v4",
+  "translation_progress": {
+    "source_gettext_keys": 2206,
+    "source_filled_language_families_including_english": 36,
+    "source_filled_non_english_primary_locale_catalogs": [
+      "zh_CN",
+      "zh_TW",
+      "es_ES",
+      "hi_IN",
+      "ar",
+      "pt_PT",
+      "fr_FR",
+      "bn_BD",
+      "id_ID",
+      "ja",
+      "ko_KR",
+      "de_DE",
+      "ru_RU",
+      "ur",
+      "tr_TR",
+      "it_IT",
+      "nl_NL",
+      "pl_PL",
+      "bg_BG",
+      "hr",
+      "cs_CZ",
+      "da_DK",
+      "et",
+      "fi",
+      "el",
+      "hu_HU",
+      "ga",
+      "lv",
+      "lt_LT",
+      "mt_MT",
+      "ro_RO",
+      "sk_SK",
+      "sl_SI",
+      "sv_SE",
+      "uk"
+    ],
+    "total_language_families": 36,
+    "locale_variants": 41,
+    "content_coverage_not_release_acceptance": true,
+    "editorial_and_visual_QA_pending": true,
+    "regional_locale_variants_pending": true,
+    "complete_release_accepted_translations": false,
+    "source_locale_is_english": [
+      "en_US",
+      "en_GB"
+    ],
+    "ukrainian_partial_catalog_last_in_priority": false,
+    "source_filled_locales_including_english": 41,
+    "release_accepted_locales": 0
+  },
+  "delivery_contract": {
+    "bundled_self_hosted": true,
+    "runtime_ai_translation": false,
+    "external_translation_dependency": false,
+    "wordpress_admin_locale_is_authority": true,
+    "yablonsky_ai_scope": "administrator-requested performance analysis only"
+  },
+  "locale_variants_source_filled_pending_QA": {
+    "en_GB": {
+      "inherited_from": "en_US",
+      "coverage_percent": 100,
+      "stage": "SOURCE_FILLED_PENDING_NATIVE_EDITORIAL_UI_QA"
+    },
+    "zh_SG": {
+      "inherited_from": "zh_CN",
+      "coverage_percent": 100,
+      "stage": "SOURCE_FILLED_PENDING_NATIVE_EDITORIAL_UI_QA"
+    },
+    "zh_HK": {
+      "inherited_from": "zh_TW",
+      "coverage_percent": 100,
+      "stage": "SOURCE_FILLED_PENDING_NATIVE_EDITORIAL_UI_QA"
+    },
+    "es_MX": {
+      "inherited_from": "es_ES",
+      "coverage_percent": 100,
+      "stage": "SOURCE_FILLED_PENDING_NATIVE_EDITORIAL_UI_QA"
+    },
+    "pt_BR": {
+      "inherited_from": "pt_PT",
+      "coverage_percent": 100,
+      "stage": "SOURCE_FILLED_PENDING_NATIVE_EDITORIAL_UI_QA"
+    }
+  },
+  "source_filled_locales_including_english": 41,
+  "source_filled_families_including_english": 36,
+  "audit": {
+    "date": "2026-11-07",
+    "basis": "Recounted every locale from source POT and all existing PO files; a filled entry is non-fuzzy and nonempty. Editorial / WordPress runtime acceptance not implied.",
+    "source_zip": "YPERF_9_L10N_MT_COMPLETE_INTERNAL_2026-11-07.zip",
+    "changed_coverage": [
+      {
+        "language": "ro",
+        "old": 0,
+        "new": 100.0
+      }
+    ],
+    "unchanged_previous_locale_files": true,
+    "note": "Romanian catalog fully populated; source POT parity and exact PO/MO key/string roundtrip verified.",
+    "latest_checkpoint": "YPERF_9_L10N_SL_SI_2026-11-07",
+    "sv_SE": {
+      "checked": "2026-11-07",
+      "stage": "SOURCE_FILLED_PENDING_EDITORIAL_WORDPRESS_QA",
+      "keys": 2206,
+      "untranslated": 0,
+      "printf_mismatches": 0,
+      "html_mismatches": 0,
+      "plural_forms": 2,
+      "english_identical": 48,
+      "translation_method": "English-source manual translation; Danish terms consulted as reference",
+      "qa_note": "No external native-speaker editorial or WordPress UI test claimed"
+    },
+    "uk": {
+      "checked": "2026-11-07",
+      "stage": "SOURCE_FILLED_PENDING_EDITORIAL_WORDPRESS_QA",
+      "keys": 2206,
+      "source_filled": 2206,
+      "untranslated": 0,
+      "printf_mismatches": 0,
+      "html_mismatches": 0,
+      "plural_forms": 3,
+      "english_identical": 28,
+      "newly_translated_keys_this_pass": 1219,
+      "prior_translations_preserved": 987,
+      "plural_form_repairs": 3,
+      "translation_method": "Manual Ukrainian translation directly from 2.56.0 English source; previous Ukrainian strings preserved; deficient third plural variants completed",
+      "qa_note": "No native-speaker editorial or WordPress UI test claimed"
+    }
+  },
+  "source_template": "source-overlay/languages/yablonsky-performance.pot",
+  "source_template_keys": 2206,
+  "audit_checkpoint": "YPERF_9_INDEPENDENT_L10N_QA_2026-11-07",
+  "release_gate": "HOLD_EDITORIAL_AND_WORDPRESS_RUNTIME",
+  "independent_structural_qa": "PASS",
+  "independent_editorial_qa": "FAILED_SAMPLES_SK_SL_PENDING_ALL_LOCALES",
+  "versioning_reference": "YABLONSKY_PRODUCT_VERSIONING_CANON_v1.0.0_2026-09-21.md"
+}

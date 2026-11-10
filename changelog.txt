@@ -1,0 +1,956 @@
+= 2.56.0 =
+* Adds crawler-aware portable caching: weak ETags and 304 on fresh public HTML, preserved SEO response headers, stronger request privacy and variant safeguards, safe service-route exclusion, and scoped cache invalidation. User-triggered AI fetchers are separated from crawler admission. Existing cache authority and settings stay unchanged.
+
+= 2.55.0 =
+* Portable Page Cache: 1.5-second bounded waiting on a cold key (previously 200 ms); a concurrent refresh can serve an existing anonymous HTML copy for up to 90 seconds beyond its 300-second TTL without browser-cache reuse.
+* A native-Nginx adoption authority blocks accidental activation of the competing WordPress drop-in; activation remains explicit, reversible and requires execution proof.
+* Privacy and compatibility: expanded personalized/session/language cookie bypass and 2 MiB object limit. No query-string caching, no private WooCommerce or WPML response caching, no new server dependencies.
+* Preserves existing YPerf settings, functions, native cache and the managed early runtime. Release manifest regenerated from packaged payload.
+
+= 2.54.1 =
+* Unifies Health Check workflow: Run Health Check, JSON/TXT download and copy controls now sit together beside the result summary; details carry evidence only.
+* Diagnostics owns SQL Hotspots and its SQL-only JSON. The full Runtime Report remains in Health Check, avoiding identical tables and exports in multiple sections.
+* Overview Origin Cost now provides quick metrics and one route into detailed SQL analysis. No duplicated SQL table or exports.
+* Extends Blob URL lifetime for asynchronous browser downloads; SQL export verified with real browser downloads on three screen widths.
+* Keeps WooCommerce, query telemetry, video optimization, external cache and MU runtime policies unchanged.
+
+= 2.53.0 =
+* Direct full JSON, SQL-only JSON and TXT exports beside SQL Hotspots on Overview and Diagnostics. Repairs Diagnostics deep links, keeps legacy diagnostic surfaces and preserves runtime behavior.
+
+= 2.52.1 =
+* Fixes Diagnostics information architecture: SQL Hotspots, saved Runtime Report, and direct JSON/TXT export are now discoverable in the Diagnostics tab.
+* Preserves prior diagnostics, health report export, WooCommerce behavior, media, and external cache ownership.
+
+= 2.52.0 =
+* Adds signed-probe-only SQL Hotspots: five ranked, anonymized slow-query fingerprints per origin-executed route, with cumulative cost, maximum cost and query-shape flags.
+* Shows hotspots within the existing Diagnostics runtime report, including responsive tables; preserves public traffic performance and all commerce queries.
+* Keeps the accepted YouTube public handler and Vimeo canary unchanged. No SQL rewriting, new cache owner, host modification or automatic optimization occurs.
+
+= 2.51.0 =
+* Adds an opt-in Vimeo iframe proof canary (?yperf_vimeo_canary=1), never automatically activated on ordinary pages.
+* Uses a local click-to-play preview without Vimeo JavaScript, thumbnail API, or cross-origin requests before user activation.
+* Preserves the original Vimeo embed URL and optional unlisted hash on the external fallback link; unknown and sandboxed embeds remain unchanged.
+* Retains public YouTube behavior and existing single Video & Media control. No Nginx, host, commerce or MU-runtime policy changes.
+
+= 2.50.2 =
+* Optimize Now reconciles ambiguous AJAX transport errors against its existing authenticated progress ledger, including confirmed acceptance, verified failure and pending prewarm. No duplicate optimization request is issued.
+* When completion cannot be verified, the UI shows an inconclusive state and keeps the action disabled until reload. No changes to frontend media handling or cache ownership.
+
+= 2.50.1 =
+* Redesigns Video & Media Optimization settings into responsive, accessible cards with a dedicated cache-busted admin stylesheet. The installed media-optimization engine and public enablement option stay unchanged.
+* Corrects WordPress Plugin Check upgrade-notice length for 2.50.0.
+* Keeps the managed early runtime version aligned with the plugin header and language manifest.
+
+= 2.50.0 =
+* Adds a dedicated Cache → Video & Media surface and a single entry point under Performance Controls.
+* Renames the public capability from YouTube Video Lite to Video & Media Optimization to describe its expandable, plugin-independent architecture.
+* Shows a truthful provider capability map: YouTube HTTPS iframe embeds supported; Vimeo, Facebook, Instagram and unknown media formats not yet supported and untouched.
+* Preserves the proven YouTube click-to-play handler, its private-session exclusions, existing origin policy option, canary URLs, public proof markers and WordPress enqueue handles for backward compatibility.
+* Upgrades preserve the ON/OFF choice. Optimize Now does not silently change this choice. Host-owned cache remains untouched.
+* No claim of new provider acceleration until individual provider contracts pass browser/runtime/consent tests.
+
+= 2.49.0 =
+* Adds an explicit default-OFF, administrator-controlled YouTube Video Lite adoption switch for eligible anonymous public GET pages, backed by the field-proven 2.48 canary.
+* Matched ?yperf_video_lite_canary=0/1 comparisons remain available; no query parameter persists any setting.
+* Protected routes, signed-in visitors, WooCommerce session cookies, POST/HEAD, other video providers, and unknown YouTube formats retain existing behavior.
+* Public switch checks the local early runtime and verifies its stored value without running an expensive full Health Check. On/off is immediately reversible at origin; existing external Nginx HIT content remains subject to separate cache freshness proof.
+* Keeps media ratio and missing-thumbnail fallback, with no new CSS/JS dependency outside WordPress enqueue APIs.
+* No automatic public enablement by upgrading or Optimize Now, no Nginx/Cloudflare cache delete or host configuration changes.
+
+= 2.48.2 =
+* Corrective: align the early runtime source version with the installed plugin and managed MU bootstrap. Restores fail-closed version verification and the registered muplugins_loaded early-runtime phase.
+* Corrective: normalize release coordinates in localization manifest and translation metadata.
+* No new frontend features, page-cache writes, server configuration changes or Video Lite promotion. The Video Lite canary remains opt-in.
+
+= 2.48.1 =
+* Corrective: register Video Lite CSS/JavaScript through WordPress enqueue APIs to satisfy Plugin Check resource ownership.
+* Corrective: prevent double-height Gutenberg ratio wrappers and improve layout stability for Video Lite previews.
+* Corrective: recognize YouTube's generic 120x90 thumbnail or broken image; show an accessible link to the original video instead of an ambiguous grey image. Video status remains unverified and site content is never deleted.
+* Preserves original YouTube start-time parameters in the external-watch fallback.
+* Remains opt-in and canary-only. No Nginx/cache policy, WooCommerce, WPML, production JS scheduling or host changes.
+
+= 2.48.0 =
+* Adds an isolated YouTube video-lite canary, activated only through ?yperf_video_lite_canary=1 on eligible anonymous public GET routes.
+* Defers loading YouTube embed runtimes until a visitor clicks a preview. The preview link remains usable if JavaScript is unavailable.
+* Preserves the production frontend execution path and all existing cache, WooCommerce, WPML, security, and origin boundaries until field canary evidence supports promotion.
+
+= 2.47.1 =
+* Corrective: purge operation UI and toolbar show accurate confirmed/pending/failed statuses while retaining existing execution boundaries.
+* No frontend scheduling, external-cache filesystem writes or performance-policy changes.
+
+= 2.47.0 =
+* Adds matched control/native-defer critical-path canaries for causal browser-performance comparison.
+* Separates ordinary frontend Runtime Acceptance from the experimental native-defer probe so diagnostic proof no longer changes the production-like control path.
+* Adds a dedicated native-defer canary Runtime Acceptance step and keeps the existing production path unchanged until canary evidence supports promotion.
+* Preserves the legacy 2.46.x canary selector for field continuity.
+
+= 2.46.2 =
+* Corrective: removes Plugin Check warnings from the read-only native-defer canary selector and keeps canary behavior unchanged.
+* Shortens the 2.46.1 WordPress.org upgrade notice to the 300-character limit.
+
+= 2.46.1 =
+* Keeps native-defer execution probe/canary-only while adding a conservative leaf-only fallback for the diagnostic canary.
+* Leaves ordinary visitor traffic on the previously proven execution path and keeps Runtime Acceptance evidence for defer behavior.
+
+= 2.46.0 =
+* Adds an opt-in WordPress-native header-script defer layer for eligible same-origin public scripts. The new layer is enabled only by an explicit Optimize/apply-profile action; upgrading alone does not change script execution order.
+* Lets WordPress 6.3+ keep dependency-order authority while YPerf fails closed for jQuery, security/consent bootstraps, footer scripts, pre-strategized scripts and handles carrying inline before/after/data payloads.
+* Adds Runtime Acceptance evidence for defer intention, actually rendered defer attributes, blocked intentions and the remaining external parser-blocking head-script count.
+* Keeps the existing dependency-closed late-execution engine, CSS ownership/inlining, external page-cache coexistence, WooCommerce private-route exclusions and Optimize rollback gates.
+* Keeps the defer policy portable across themes, hosts and multilingual stacks: decisions are based on WordPress script metadata, dependency safety and same-origin evidence rather than site-specific exceptions.
+
+= 2.45.5 =
+* Stabilizes frontend execution on complex WooCommerce and multilingual stacks by returning to the proven conservative delivery path.
+* Keeps script-strategy activation outside the active runtime until compatibility evidence is available, without hostname, theme or site-specific exceptions.
+* Keeps Optimize preflight protective: a fresh Health Check confirms functional readiness before local changes are applied.
+* Tightens external page-cache proof so a visible cache header on an HTTP 4xx/5xx response is not reported as healthy execution.
+* Preserves the 2.45.3 field-proven CSS ownership, adaptive LCP priority, external cache coexistence and rollback contracts.
+
+= 2.45.4 =
+* Adds a site-independent WordPress-native defer pass for eligible same-origin header scripts on WordPress 6.3+, letting WordPress dependency and inline-after safety rules decide the final strategy instead of hard-coding theme libraries.
+* Keeps jQuery plus consent/security bootstraps on their original path while exposing probe evidence for intended defer, rendered defer and remaining parser-blocking head scripts.
+* Makes adaptive first-paint image discovery main-content aware and scans a larger bounded image set so large navigation/mega-menu image inventories cannot crowd out the real page hero.
+* Adds bounded high fetch priority to remaining same-origin render-blocking stylesheets without changing stylesheet semantics, CSP rules, ownership rules or byte caps.
+* Moves adaptive LCP evidence into an early probe marker so bounded Runtime Acceptance reads cannot lose a valid candidate proof later in a long document.
+
+= 2.45.3 =
+* Makes bounded same-origin CSS delivery route-agnostic on eligible public pages instead of requiring a core/cover source hint; existing CSP, ownership, media, @import and byte-cap safety gates remain authoritative.
+* Adds adaptive final-document LCP image discovery using generic DOM position, image attributes and semantic container evidence; it promotes at most one same-origin high-confidence candidate and does not contain theme, hostname or MonParle-specific rules.
+* Keeps uncertain pages fail-closed: no image is promoted below the confidence threshold, and non-candidate routes keep heavyweight execution behind load/idle, explicit user intent or the bounded late fallback.
+* Extends Runtime Acceptance proof so CSS execution is required on every eligible public route and reports whether an adaptive LCP candidate was found.
+* Preserves external page-cache authority, transactional WooCommerce exclusions, dependency-closed delayed-script groups and current rollback semantics.
+
+= 2.45.2 =
+* Keeps non-hero public routes responsive by releasing dependency-closed heavyweight scripts after DOM readiness and an initial paint opportunity, with a short bounded fallback.
+* Applies the LCP-observed quiet gate only to routes where YPerf has positively identified a paint-first hero, avoiding circular first-paint dependencies on generic routes.
+* Aligns the diagnostic policy header with the effective route gate while preserving first-user-intent execution, late analytics, external page-cache authority and rollback semantics.
+
+= 2.45.1 =
+* Adds an application-wide 12 px top-level module rhythm contract across every YPerf tab so cards, grids, subnavigation and technical modules no longer visually collide.
+* Clarifies Health Check versus Optimize Now directly in the Health Check UI: Health Check verifies current state; Optimize Now performs its own fresh preflight, applies YPerf-owned changes, proves them and accepts or rolls back.
+* Uses `Recheck after upgrade` when runtime evidence belongs to an earlier plugin version, avoiding an ambiguous active-state label while proof is stale.
+* Preserves external Nginx/FastCGI page-cache authority, YPerf Page Cache OFF-by-design coexistence, one Health Check evidence surface and all rollback gates.
+
+= 2.45.0 =
+* Corrects the header optimization-state model to trust the canonical proven page-cache layer, including accepted external Nginx/FastCGI authority.
+* Allows a clean current-version Runtime Acceptance plus proven external page-cache execution to show green `Optimized` without enabling YPerf Page Cache.
+* Preserves external cache ownership, one Health Check surface, frontend execution proof and rollback safety.
+
+= 2.44.0 =
+* Consolidates Health Check into one dedicated page and removes duplicate Runtime Acceptance surfaces.
+* Aligns CSS proof with the paint-first route gate used by the actual frontend transformer.
+* Keeps full Health Check details and JSON/TXT export on the same page.
+* Preserves external cache authority, Managed MU runtime, Origin Survival and rollback safety.
+
+= 2.43.0 =
+* Accepts valid zero-inlined CSS execution as proof that the frontend delivery pipeline ran safely.
+* Moves probe-only CSS proof to the start of the document head for bounded-response reliability.
+* Adds persistent Optimize proof/evidence actions and exact failed-gate rollback evidence.
+* Preserves Nginx/FastCGI page-cache authority, Redis object-cache authority, Origin Survival and YSec coordination.
+
+= 2.42.0 =
+* Establishes one canonical YPerf self-probe User-Agent family across public-edge and local-origin Runtime Acceptance paths.
+* Restores frontend execution proof on Cloudflare-blocked hosts by allowing the bounded local-origin probe to emit the same YPerf diagnostic headers as the public probe.
+* Adds exact post-apply failed-test names to regression/rollback evidence so Optimize outcomes identify the functional gate that triggered recovery.
+* Preserves external Nginx/FastCGI page-cache authority, Redis Object Cache authority, Origin Survival and Managed MU coordination.
+
+= 2.41.0 =
+* Added cache-authority continuity for Optimize: a proven external Nginx/FastCGI page cache is preserved while YPerf applies its local frontend/runtime profile.
+* Preserved external cache authority metadata through Runtime Acceptance normalization and added cache-signal fallback detection.
+* Updated Optimize profile copy to describe authority-aware delivery instead of implying a second YPerf page-cache executor on externally cached hosts.
+* Kept Origin Survival, Managed MU coordination, background workload intelligence and bounded sitemap diagnostics unchanged.
+
+= 2.40.0 =
+* Adds a bounded seven-second sitemap diagnostic budget so a slow producer route cannot consume the whole Health Check request.
+* Exports Managed MU and Origin Survival coordination metadata in Runtime Acceptance JSON.
+* Adds read-only Action Scheduler workload evidence for pending, past-due, failed, complete and in-progress actions.
+* Keeps the established two-slot Origin Survival behavior and explicit security-before-capacity ordering.
+* Updates the Health Check interruption surface to affirmative product language.
+
+= 2.39.0 =
+* Adds explicit Managed MU phase ordering on `muplugins_loaded`: YPerf owns the performance/capacity phase at priority -900 while the YSec coordination contract reserves the earlier -1000 security phase.
+* Removes reliance on MU filename ordering while keeping both early layers ahead of normal WordPress plugins.
+* Exposes execution hook, priority and `security_then_capacity` coordination metadata through Managed Runtime and Origin Survival status evidence.
+* Preserves the two-slot Origin Survival crawler budget, Retry-After behavior, page-cache compatibility and current performance semantics.
+
+= 2.38.1 =
+* Corrects WordPress Plugin Check compliance in Origin Survival runtime by using WordPress-native random and URL helpers.
+* Origin Survival admission, cache ownership, crawler budget, diagnostic pacing and runtime behavior are unchanged from 2.38.0.
+
+= 2.38.0 =
+* Adds portable Origin Survival admission control to the Managed Early Runtime.
+* Bounds concurrent known content-crawler requests that reach WordPress after cache layers, preserving PHP-worker capacity for human and private traffic.
+* Uses a portable WordPress option semaphore with two crawler cold-origin slots by default; expert deployments may set YPERF_ORIGIN_CRAWLER_SLOTS from 1 to 8.
+* Full crawler-origin capacity returns HTTP 503 with Retry-After: 5 so standards-aware crawlers can continue shortly while origin capacity recovers.
+* Adds Runtime Acceptance and Feature Catalog evidence for the new capability.
+* Preserves Page Cache wire compatibility through the 2.34.7 executor lineage and keeps external page-cache authority behavior unchanged.
+* New public copy follows Yablonsky Positive Product Language Canon v1.1.0.
+
+= 2.37.2 =
+* Makes Runtime Acceptance portable on Cloudflare-protected slow origins: bounded local-origin probes distinguish runtime failure from diagnostic inconclusiveness.
+* Extends edge-aware local-origin proof to sitemap/service checks so a Cloudflare self-probe block is not mislabeled as a broken sitemap producer.
+* Exports public/origin proof metadata and restores signed query-cost telemetry for local-origin probes.
+* Managed MU, crawler-action, cache ownership and deep-archive runtime semantics are unchanged.
+
+= 2.37.1 =
+* Corrects WordPress Plugin Check warnings in the managed early runtime and Runtime Acceptance input handling.
+* Runtime Acceptance now distinguishes Cloudflare edge self-probe blocking from local-origin runtime health.
+* Keeps the 2.37.0 managed MU, crawler-action and deep-archive behavior unchanged.
+
+= 2.36.0 =
+* External page-cache authority detection and double-cache prevention for native Nginx/FastCGI environments.
+
+= 2.35.1 =
+* Corrective Page Cache lock recovery: Health Check reaps only orphaned per-key locks older than 120 seconds before MISS → HIT proof.
+* The generated advanced-cache.php applies the same bounded stale-lock recovery. Fresh locks remain authoritative.
+* CSS preload/runtime semantics from 2.35.0 are unchanged.
+
+= 2.35.0 =
+* Early discovery hint for the remaining large active-theme stylesheet; original CSS semantics unchanged.
+* Adds Runtime Acceptance proof for early CSS preload count.
+
+= 2.34.7 =
+* Corrects installable ZIP identity to the canonical yablonsky-performance directory.
+* Runtime performance semantics are unchanged.
+
+= 2.34.6 =
+* Corrects Optimize Now 94% stalls by splitting accepted-profile prewarm into bounded per-URL AJAX steps after Runtime proof is committed; terminal 100% is published only after the visible warm-up finalizer.
+* Keeps an already accepted performance baseline accepted if the optional cache warm-up transport fails, instead of leaving the UI frozen or falsely reporting a rollback.
+
+= 2.34.4 =
+* Corrective progress-truth patch: Optimize Now no longer launches a duplicate browser-side bounded prewarm after the server campaign has already prewarmed and accepted the baseline.
+* The progress renderer treats 100% as terminal truth only; a non-terminal state can display at most 99%.
+* Runtime/cache/frontend/sitemap/Cloudflare behavior is unchanged; this patch removes duplicate post-acceptance work and aligns the UI with actual execution state.
+
+= 2.34.3 =
+* Corrective sitemap-independence patch: Runtime Acceptance now proves the protected-service bypass policy deterministically without depending on a working sitemap producer.
+* Live sitemap HTTP/content defects outside YPerf are reported as ATTENTION only; they never become a YPerf functional FAIL when Page Cache, Browser Cache and frontend transforms stayed out of the response.
+* Sitemap discovery may continue past an unhealthy standard root to inspect another healthy same-origin root, while remaining bounded to the existing three standard roots and nine total samples.
+* Page Cache, Browser Cache, frontend optimization, Cloudflare behavior and CSS safety caps are unchanged.
+
+= 2.34.2 =
+* Corrective truth patch: stale Runtime Acceptance HIT evidence can no longer present the YPerf Page Cache as active when the live executor is OFF/absent or its executor version is not current.
+* Corrective UX patch: an Autopilot preflight blocked before writes now stops at the preflight stage instead of rendering 100% with all five stages green.
+* Normal Page Cache execution, frontend delivery, sitemap isolation and provider behavior are unchanged.
+
+= 2.34.1 =
+* Corrective patch: scopes Page Cache artifact-refresh rollback to Page Cache and sitemap-isolation gates instead of any unrelated Runtime Acceptance failure.
+* Moves probe-only JavaScript delay proof to the opening head region so bounded Runtime Acceptance response sampling cannot truncate the no-op/candidate evidence.
+* Sanitizes REQUEST_URI before protected-service path parsing, resolving the WordPress Plugin Check warning introduced by 2.30.0.
+* Normal visitor frontend behavior and CSS byte safety caps are unchanged.
+
+= 2.34.0 =
+* Replaces the coarse delayed-JavaScript marker gate with probe-only candidate/delayed/loader evidence. A page with the delay policy enabled but zero eligible scripts is now a proven safe no-op instead of a false Runtime Acceptance failure.
+* Keeps normal visitor HTML unchanged by emitting the JavaScript proof comment only to YPerf Runtime Acceptance probes.
+
+= 2.33.0 =
+* Adds probe-only stylesheet skip reasons to Runtime Acceptance. Remaining stylesheet links now explain whether YPerf failed closed because of integrity/no-inline/print/cross-origin, unresolved local ownership, file/total byte caps, @import, read failure or empty sanitized CSS. Normal visitor HTML is unchanged.
+
+= 2.32.0 =
+* Adds a fail-closed current-theme filesystem resolver for path-hidden WordPress stylesheet handles. A hidden same-origin CSS link may bind only to a unique readable CSS file under the active stylesheet/template directory with matching trailing asset path; no remote fetch is introduced.
+* Extends CSS proof with a separate current-theme resolution count so hidden theme CSS can be distinguished from handle anchors, captured-tail aliases and ordinary local URL mapping.
+
+= 2.31.0 =
+* Adds bounded same-origin sitemap isolation evidence to Runtime Acceptance. YPerf verifies that discovered XML sitemap routes remain outside Page Cache, Browser Cache and frontend HTML transforms, while content-type/XML defects outside YPerf are reported as attention rather than misclassified as YPerf failures.
+
+= 2.30.0 =
+* Adds a fail-closed protected-endpoint boundary across the pre-bootstrap Page Cache, WordPress request policy and frontend optimizer. Dynamic XML/sitemap routes, robots.txt, feeds, XML-RPC and OPML never become YPerf HTML cache/transform targets.
+* Older exact YPerf Page Cache artifacts remain eligible only for explicit hash-guarded refresh and no longer count as current runtime after this wire-policy change.
+
+= 2.29.2 =
+* Runtime Acceptance diagnostic corrective patch: preserves structured CSS inline proof in exported JSON, identifies the exact remaining stylesheet links, and reports which frontend proof gates passed or failed. Frontend optimization runtime is unchanged.
+
+= 2.29.1 =
+* Runtime Acceptance corrective patch: the dedicated signed frontend proof now uses an uncached query-bearing homepage request, so Page Cache warming earlier in the same Health Check can no longer suppress CSS inline/ownership proof evidence. Frontend optimization runtime is unchanged.
+
+= 2.29.0 =
+* Integrates the probe-only CSS delivery ledger into Runtime Acceptance so one bounded Health Check can show whether rewritten styles resolved by durable anchor, captured-tail fallback or local path while preserving existing pass/fail safety semantics.
+
+= 2.28.0 =
+* Adds probe-only CSS delivery evidence with inlined bytes, anchor/tail/local resolution counts and remaining stylesheet count. Normal visitor HTML is unchanged; the proof is emitted only to YPerf runtime probes.
+
+= 2.27.0 =
+* Hardens ownership-anchor recovery across path-hiding output filters that insert bounded harmless comments or whitespace between a stylesheet tag and the YPerf anchor; orphan anchors are still removed before delivery.
+
+= 2.26.0 =
+* Adds a fail-closed unique captured-style fallback: rewritten public CSS can bind to already trusted local bytes by an unambiguous trailing asset path, with no remote fetch and no filesystem guessing.
+
+= 2.25.0 =
+* Adds durable opaque stylesheet ownership anchors so hidden-path/security rewrites can preserve the registered WordPress style identity without weakening CSP, realpath, same-origin or byte-cap gates.
+
+= 2.24.3 =
+* Plugin Check corrective patch: shortens the historical 2.24.1 Upgrade Notice so every Upgrade Notice entry is within the WordPress.org 300-character limit. Runtime behavior is unchanged from 2.24.2.
+
+= 2.24.2 =
+* Plugin Check corrective patch: keeps the current upgrade notice within the 300-character WordPress.org limit. Runtime behavior is unchanged from 2.24.1.
+
+= 2.24.1 =
+* Plugin Check corrective patch for verified toolbar return handling; no frontend performance behavior change.
+
+= 2.24.0 =
+* Turns the WordPress admin-bar Optimize Now and Prewarm Now entries into direct actions that return to the page where the administrator was working.
+* Keeps toolbar purge actions on the current screen and names Cloudflare-synchronized purges explicitly when the edge profile is adopted.
+* Adds a late admin-bar recovery hook for app-style wp-admin screens that rebuild or remove custom toolbar nodes.
+* Wires bounded automatic prewarm into every successfully accepted Optimize Now campaign (6 high-value URLs / 15 s budget); manual/toolbar prewarm remains available up to 12 URLs.
+* Adds paint-first jQuery dependency scheduling on Cover-hero routes. The policy is fail-closed when YPerf sees an unowned inline jQuery consumer.
+* Expands the registered dependency graph so delayed jQuery/heavy work can pull in only dependencies used exclusively by delayed consumers, replacing the useful part of broad provider JS scheduling without re-enabling Rocket Loader.
+* Page Cache wire format and Cloudflare/YSEO authority boundaries remain unchanged.
+
+= 2.23.0 =
+* Makes every YPerf toolbar purge return to the exact admin/front-end page where the operator invoked it instead of forcing navigation into the YPerf dashboard.
+* Clarifies URL semantics in the toolbar: “Purge homepage URL” in wp-admin and “Purge this URL” on the public page.
+* Adds an explicit Cloudflare “Verify homepage URL purge” operation with visible progress and read-back result so purge synchronization can be proved without guessing which cache action to use.
+* Cloudflare URL/host purge is now eligible whenever the requested local purge is not failed/blocked, even when no local page-cache executor is currently active; the adopted edge executor is no longer artificially gated by local cache presence.
+* Preserves the exact 2.22 frontend optimizer, prewarm, Page Cache wire format and Cloudflare settings allowlist; this is a cache-control/admin UX pass, not a new PSI experiment.
+* Documents PHP compatibility truthfully: 7.4 is the declared minimum (not “any PHP 7”), Generator live evidence is PHP 8.1, and the release package is syntax-validated on PHP 8.4; broader per-version CI remains a public-GA gate.
+
+= 2.22.0 =
+* Rebuilds Settings → Edge / Cloudflare as a responsive two-column workspace: provider controls on the left and a compact four-step Quick Setup guide on the right, removing the dead desktop gap and button overflow seen after connection/inspection.
+* Adds immediate visible activity feedback for Inspect, Adopt and Rollback operations while preserving the existing guarded admin-post authority path and backend proof/rollback behavior.
+* Adds explicit alignment state: connected/adopted profiles now distinguish aligned vs review-needed, and already-aligned zones can be adopted without unnecessary Cloudflare setting writes while enabling YPerf purge synchronization.
+* Corrects least-privilege token guidance to Zone Read + Zone Settings Edit + Cache Purge for the selected zone only. Cloudflare crawler, DNS, WAF, Bot Management and YSEO-owned policy remain excluded.
+* Expands provider results into a wrap-safe capability table, adds last-inspected/last-operation evidence, responsive mobile layout and clearer effective-compression ownership language.
+* Adds complete WordPress.org external-service disclosure for the optional Cloudflare management API. Frontend visitors never trigger Cloudflare management API calls.
+* Frontend performance runtime, Page Cache wire format, first-paint scheduler, prewarm behavior and Cloudflare setting allowlist are unchanged from 2.21.0 so the next PSI pass isolates provider adoption rather than a new frontend experiment.
+
+= 2.21.0 =
+* Optional Cloudflare Performance Adapter with encrypted site-scoped API token storage and automatic/manual zone resolution.
+* Explicit provider adoption controls only Rocket Loader (OFF) and HTTP/3 (ON), with pre-write snapshot, API read-back proof and drift-safe rollback.
+* Successful YPerf URL and host purges synchronize to Cloudflare only after adoption; semantic URL sets are batched.
+* Early Hints, Speed Brain, APO and effective response compression are observe-only. YPerf keeps transport compression provider-native and does not use the legacy Brotli toggle.
+* Cloudflare AI Search / Training / Agent/User policy, Bot Preference Sync, robots.txt, Bot Management, WAF, DNS and crawler semantics are explicitly excluded and remain Yablonsky SEO / security authority.
+* Least-privilege token guidance: Zone Read, Zone Settings Read, Zone Settings Edit and Cache Purge only for this adapter.
+* Page Cache wire/runtime format remains compatible with 2.20.0. Local YPerf operation remains fully functional without Cloudflare.
+
+= 2.20.0 =
+* Autopilot Hot Start: successful Optimize Now campaigns now finish by reusing the existing bounded same-origin Prewarm operation, so the first real visitor is not asked to populate a cold public Page Cache.
+* Prewarm remains operationally separate from the guarded performance write: a warmup failure does not rewrite or roll back an already accepted local performance profile.
+* Edge Delivery Evidence: Runtime Acceptance now records effective provider/compression signals (`content-encoding`, Cloudflare, Rocket Loader presence, Speed Brain header and HTTP/3 advertisement) without requiring provider credentials or changing provider configuration.
+* Compression ownership is explicit: YPerf verifies effective compressed HTML while the native edge/web-server layer remains the transport executor.
+* Page Cache wire/runtime format remains compatible with 2.19.0.
+
+= 2.19.0 =
+* Evidence-driven mobile stability pass after exact 2.18.0 produced 10 mobile PSI scores of 90, 91, 89, 90, 90, 99, 98, 92, 92 and 98 while desktop scored 100 in all 10 runs.
+* Captures eligible local stylesheet bytes at the early style_loader_src stage before Hide My WP/security URL rewriting, while keeping the existing late handle marker and full-document CSP/ownership/byte-cap decision point.
+* Marks the YPerf scheduling controller and YPerf-delayed script tags with data-cfasync=false so Cloudflare Rocket Loader cannot independently defer the scheduler YPerf already owns.
+* Preserves the proven 2.18 hero priority, decoding=async, LCP-observed release gate, WooCommerce private-route exclusions, Page Cache authority and rollback semantics.
+* No global Rocket Loader setting is changed; only YPerf-owned scheduling surfaces are isolated. Localization scope remains 36 language families / 41 locale variants with EN source + RU complete; later mass localization/UI-fit remains on yablonsky.io.
+
+= 2.18.0 =
+* Built from the last live green 2.16.0 baseline after 2.17.0 failed Plugin Check and did not improve the supplied three-run mobile PSI evidence.
+* Captures trusted local stylesheet bytes at the WordPress registered-handle stage so later Hide My WP/security path rewriting cannot break the existing safe inline-CSS engine.
+* The full-document pass still enforces CSP, same-origin, local realpath ownership, media/integrity, @import and byte caps; no remote CSS fetch or raw stylesheet tag injection is introduced.
+* Preserves the proven 2.14/2.16 LCP-observed delayed-JS scheduler, Page Cache authority, WooCommerce private-route exclusions and rollback semantics.
+* Keeps localization scope at 36 language families / 41 locale variants with EN source + RU complete; later localization/UI-fit belongs on yablonsky.io.
+
+= 2.16.0 =
+* Recovery release built from exact 2.14.0 after 2.15.0 live PSI evidence regressed to 89, 90, 90 and 89.
+* Rejects the 2.15 SVG synchronous-decode experiment, restores decoding=async and the exact 2.14 first-paint scheduler, and discards the unproven 2.15 stylesheet/import delta.
+
+= 2.14.0 =
+* Evidence-driven stability closeout candidate built from exact 2.13.0 after five new mobile PSI captures scored 88, 99, 90, 89 and 89 (median 89). Four slower runs kept LCP around 3.1-3.3 s while the 99 run reached 1.7 s.
+* Fixes the scheduler race exposed by those reports: a missing LCP observation is no longer interpreted as an already-quiet 2.6 s window. Passive heavy-script release now requires a real PerformanceObserver LCP candidate plus 2.5 s quiescence; first user intent still releases immediately and the existing 8 s hard fallback remains.
+* Keeps analytics in its separate later group so it cannot drag the heavyweight WordPress/WooCommerce dependency closure into the first-paint window.
+* Adds a last-stage stylesheet-handle marker at PHP_INT_MAX so path-hiding/security plugins may rewrite the public CSS URL without destroying the WordPress ownership identity needed by the full-document inline pass.
+* The marker is non-rendering, consumed before response completion, and does not bypass existing CSP, same-origin, realpath ownership, per-file/total byte-cap, integrity, media or @import fail-closed gates.
+* Preserves final rewritten public CSS href as the url() resolution base while using the WordPress handle only to prove the local source file.
+* Adds the new scheduler/style-marker policies as explicit profile-owned options. Updating alone does not silently adopt them; Optimize Now intentionally applies them and existing portable settings imports default the new behaviors OFF.
+* Keeps the Page Cache wire/runtime format compatible with 2.13.0 and preserves singular cache authority, W3TC migration finality, WooCommerce private-route exclusions and user-controlled third-party plugin activation.
+* Localization scope remains 36 language families / 41 locale variants with EN source + RU complete. The mass translation train is intentionally deferred until performance/cross-site validation, with yablonsky.io suitable for the later localization/UI-fit phase.
+
+= 2.13.0 =
+* Evidence-driven corrective release after exact 2.12.0 passed Plugin Check and Optimize Now but the new mobile PSI evidence remained in the 79-88 range rather than improving the accepted 2.11 distribution.
+* Preserves original WordPress stylesheet identity before path-hiding/security filters rewrite the public href; final inlining still runs only after full-document CSP inspection and existing local ownership/byte-cap/@import gates.
+* Splits delayed script dependency closures into heavyweight and analytics groups, adds an LCP-quiescence + idle release gate, preserves immediate user-intent execution, and keeps bounded fallbacks.
+* Removes incidental mouse movement as a late-script release trigger.
+* Widens Site & Server environment-status badge geometry so AVAILABLE, ATTENTION and UNKNOWN remain single-line at the accessibility font floor.
+* Keeps the portable Page Cache executor boundary unchanged and compatible with 2.12.0. No W3TC remigration, Redis adoption, host write or third-party plugin activation change is introduced.
+* Keeps localization scope at 36 language families / 41 locale variants with truthful completion still 2/36 pending the one-batch localization train.
+
+= 2.12.0 =
+* Live-evidence stabilization pass: fail-closed rewritten-CSS resolution, paint-idle heavyweight release, 36-language scope reconciliation, and full release/security revalidation.
+
+= 2.11.0 =
+* Adds bounded same-origin first-paint CSS delivery on eligible public WordPress Cover hero routes. Eligible local styles are inlined in their original order with media preservation, relative url() rewriting, size caps and CSP fail-closed checks.
+* Moves the one bounded LCP image preload to the earliest safe head position, keeps fetchpriority=high and restores asynchronous decode so image decoding cannot unnecessarily block paint.
+* Extends the paint-aware heavy-script release window; first user intent still releases immediately, while slower anonymous loads get more room to complete first paint before non-critical WordPress/WooCommerce execution resumes.
+* Runtime Acceptance now proves the inline-CSS marker when that policy is active; settings export/import and rollback snapshots include the new policy.
+* Rebuilds Expert Server Diagnostics into a three-card responsive overview. Opening one tool expands it to a full-width workspace, closes sibling tools and restores consistent internal padding/gaps.
+* Shortens the historical 2.9.0 upgrade notice that still triggered the WordPress.org 300-character warning in 2.10.0.
+* Keeps Page Cache wire format, third-party plugin activation status and all Nginx/Redis/PHP-FPM authority boundaries unchanged.
+
+= 2.10.0 =
+* Adds a paint-aware heavy-JS release gate for WordPress Cover hero routes to reduce the observed 60–97 mobile PageSpeed variance without sacrificing LCP priority.
+* Delayed scripts release after the prioritized hero load plus two animation frames, immediately on user intent, or after a bounded fallback.
+* Keeps Page Cache, Browser Cache, WooCommerce private-route exclusions, rollback and third-party/server authority boundaries unchanged.
+* Shortens the current upgrade notice to stay under the WordPress.org 300-character limit.
+
+= 2.9.0 =
+* Mobile Paint & Optimize Progress pass: Optimize Now now exposes the real guarded campaign phases and percentage in the YPerf UI instead of leaving the browser-tab spinner as the only activity signal.
+* Adds a dedicated AJAX progress channel for Autopilot while preserving the normal admin-post action as a no-JavaScript fallback; progress is backed by the same preflight/apply/proof/regression/rollback state machine used by execution.
+* Adds bounded first-paint hero priority for WordPress Cover images: one same-origin hero receives fetchpriority=high, eager loading, synchronous decode and an exact preload hint.
+* On those hero routes, post-hero WooCommerce thumbnails use native lazy loading, low fetch priority and sizes=auto so responsive srcset selection can stop oversized thumbnails from competing with the LCP image.
+* Makes heavyweight JavaScript delay adaptive: routes with a WordPress Cover hero use a paint-first policy and keep ordinary WordPress/Woo hydration on the normal browser path while analytics stays late; other public routes retain dependency-closed late execution.
+* Keeps Page Cache, Browser Cache, WooCommerce private-route bypasses, rollback gates and host/server write boundaries unchanged.
+
+= 2.8.1 =
+* Corrective Page Cache compatibility patch: restores the reviewed portable-cache compatibility chain for upgrades from 1.93.2 through 2.8.0, including the live 2.3.1 executor found on Generator.pw.
+* Fixes false Optimize Now preflight blocking where Runtime Acceptance could see YPerf Page Cache enabled but the current release refused to recognize the owned historical drop-in as compatible.
+* Repair now safely refreshes the owned compatible advanced-cache.php to the current artifact, re-proves MISS → HIT, and proceeds only if Runtime Acceptance is clean.
+* No third-party plugin activation state or host-level configuration is changed.
+
+= 2.8.0 =
+* Frontend Delivery Engine closeout: keeps selected heavyweight WordPress/WooCommerce JavaScript in dependency-closed late-execution groups so dependents never outrun delayed prerequisites.
+* Adds a compatibility shim for DOMContentLoaded/load listeners registered by scripts that intentionally execute after those browser lifecycle events. The shim is active only while the delayed group is being loaded and restores the native listeners afterward.
+* Adds Runtime Acceptance proof for the execution header, emoji removal and active delayed-delivery markers; Page Cache is purged whenever frontend delivery policy changes.
+* Adds full portable settings backup/restore for Woo route gating, heavyweight JS delay and late analytics delay, with older backups defaulting the new behaviors to OFF.
+* Makes the normal Frontend Optimization control distinguish legacy/basic mode from the full delivery engine and allows one-click Enable & Prove without requiring a disable/re-enable cycle.
+* Preserves transactional WooCommerce, logged-in, REST, AJAX, feed, preview and non-GET/HEAD exclusions; public delivery changes remain WordPress-local and automatically reversible.
+
+= 2.7.0 =
+* Adds bounded late execution for Google gtag/GTM on eligible anonymous public routes.
+* Keeps the consent-default bootstrap synchronous and delays the external analytics loader together with its paired WordPress inline configuration.
+* Activates late analytics from Safe/Commerce profiles so Optimize Now can move third-party analytics CPU off the initial interaction path.
+
+= 2.6.0 =
+* Adds interaction-aware delayed execution for selected heavyweight WordPress and WooCommerce JavaScript families.
+* Preserves jQuery, ordinary theme scripts, JSON-LD and module scripts; paired WordPress before/after/extra inline fragments follow their selected handle.
+* Starts delayed execution on first intent or a bounded late timeout, preserving normal document order.
+
+= 2.5.0 =
+* Integrates the Frontend Delivery Engine policy into Safe/Commerce Autopilot profiles, settings snapshots and rollback.
+* Purges YPerf Page Cache on frontend policy changes so cached HTML cannot retain stale execution semantics.
+* Enables the route-aware WooCommerce transactional-asset gate as the first adopted delivery policy.
+
+= 2.4.0 =
+* Introduces the reversible Frontend Delivery Engine foundation as a direct extension of the accepted frontend-overhead control.
+* Adds a WooCommerce route gate that removes checkout/cart-specific queued scripts only from eligible anonymous non-transactional routes and leaves cart, checkout, account and explicitly interactive Woo block pages untouched.
+* Keeps every new delivery behavior behind a separate option so upgrading an older YPerf install never silently activates a new execution policy.
+
+= 2.3.2 =
+* Optimize Recommended now uses the full available admin width instead of leaving a dead empty column on wide screens.
+* Preserves the 2.3.1 WordPress.org migration compliance contract: YPerf never activates or deactivates third-party plugins.
+* No cache execution, migration, Redis, Nginx, PHP-FPM or runtime truth logic changed in this visual corrective patch.
+
+= 2.3.1 =
+* Product-truth patch: existing unknown/third-party object-cache.php remains untouched and is presented as an informational review state, not a site optimization failure.
+* Fixes WordPress.org upgrade notice length.
+* Keeps 2.3.0 Page Cache/Autopilot behavior and ownership guards unchanged.
+
+= 2.3.0 =
+* Product Control / WordPress.org Compliance Closeout.
+* Promotes Cache to primary navigation with direct safe controls as the default surface; Tools and System Map become secondary cache views.
+* Adds admin-bar quick actions for Optimize, Cache controls, current/home-page purge, Page Cache purge, all-cache purge and Prewarm.
+* Rebuilds W3 Total Cache migration around explicit administrator activation-status control. YPerf prepares the handoff, asks the user to deactivate W3TC in Plugins, then continues proof/ownership reconciliation. No activate_plugin/deactivate_plugins calls remain.
+* Keeps completed Migration visible, while rendering the migration journey/history in one balanced column and pushing technical evidence below the human workflow.
+* Reconciles compatible live YPerf Page Cache drop-ins with stale authority metadata instead of presenting a false OFF state.
+* Closes the 2.2.0 Plugin Check output escaping, input sanitization and translators-comment findings.
+
+= 2.2.0 =
+* Market-control closeout: Optimize Now now activates and verifies YPerf Page Cache, Browser Cache and safe local WordPress optimization instead of merely changing a profile flag.
+* Adds direct Page Cache, Browser Cache, Frontend Optimization and WooCommerce First-hit Protection controls with automatic execution proof and rollback.
+* Fixes the 2.1.0 Page Cache state contradiction exposed in production: a failed proof no longer makes an installed owned drop-in appear OFF; the state becomes Needs repair until current proof succeeds.
+* Makes portable Page Cache proof clear the bounded YPerf cache namespace before MISS → HIT verification so compatible historical executor path semantics cannot create a false proof failure.
+* Adds explicit Repair & verify for owned Page Cache and automatic repair during Optimize Now when the only failing Health Check is a YPerf-owned cache proof.
+* Restores completed Migration as visible permanent site history with 100% completion instead of removing the navigation surface.
+* Adds portable settings Export/Import with local browser-side JSON reading, transactional application, Health Check verification and rollback; secrets/evidence/host authority are excluded.
+* Reorganizes Tools around real operations first; Inspect returns to Operations and diagnostic raw exports remain in Diagnostics.
+
+= 2.1.0 =
+* Market UX closeout: removes the global Site Readiness wizard/progress banner from normal navigation and stops presenting an installed, working site as perpetually "25% prepared" after upgrades.
+* Makes local one-click Autopilot the primary Optimize path; Yablonsky AI is explicitly optional and no longer visually blocks local optimization.
+* Preserves compatible clean runtime/benchmark/page-cache evidence across the 2.1.0 UI-only boundary instead of forcing repetitive acceptance clicks after every plugin update.
+* Keeps a previously verified Yablonsky AI account connected across cache-age expiry; account metadata can refresh separately without re-entering or re-verifying the saved key.
+* Renames Setup to Settings and Control Center to Tools in the public navigation; hides completed Migration when no migration source is active.
+* Removes engineering release gates, field-acceptance checklists and localization factory status from the normal customer UI.
+* Moves Host Intelligence and Evidence Reconciliation out of normal Settings into collapsed expert-only Advanced diagnostics. No SSH/JSON workflow is presented to ordinary users.
+* Renames the customer-facing Runtime Acceptance surface to Health Check while preserving Runtime Acceptance terminology in technical diagnostics and exported evidence.
+
+= 2.0.0 =
+* Major 2.x product/workflow closeout.
+* Bundled read-only Host Inspector with guided download → SSH run → JSON import workflow.
+* Runtime truth reconciliation across current-run routes.
+* Version-bound lifecycle proof surface.
+* Explicit current-artifact Page Cache alignment remains guarded by proof and rollback.
+
+= 1.99.0 =
+* Final 1.x Market RC closeout. Keeps 1.97.0 as the accepted rollback authority until live 1.99.0 acceptance.
+* Reworks WordPress.org packaging: concise directory-ready readme, current-release-only readme changelog, explicit optional Yablonsky AI service/privacy disclosure and historical detail retained in changelog.txt.
+* Separates implemented/detected capabilities from future roadmap; Database Cache, Fragment Cache and Minify/Assets are explicitly outside the 1.x market baseline until bounded executors and rollback contracts exist.
+* Reframes Redis/Object Cache and host-level Origin Budget as optional site execution coverage rather than mandatory market-release gates.
+* Carries compatible clean 1.97.0 Runtime/Benchmark/Page Cache evidence into 1.99.0 only across unchanged execution boundaries; active Object Cache blocks timing evidence carry-forward.
+* Extends the portable Page Cache compatibility chain through 1.97.0 without silently rewriting a proven compatible previous executor artifact.
+* Re-runs full PHP/JS/package integrity, gettext parity, dependency/supply-chain, static security and targeted local adversarial/regression harnesses for the final 1.x candidate.
+
+= 1.97.0 =
+* Reconciles dashboard truth across Site Readiness, Insights and Release Readiness: proven portable Page Cache authority is no longer confused with optional native Nginx adoption proof.
+* Exposes the exact YPerf advanced-cache.php artifact version and distinguishes current, compatible-previous and incompatible runtime artifacts without silently rewriting a proven cache boundary.
+* Adds an explicit bounded executor refresh for compatible previous Page Cache artifacts: exact-hash gate, current artifact write, MISS/HIT proof, Runtime Acceptance and automatic rollback on failure.
+* Restores the full compatible portable Page Cache chain from 1.93.2 through 1.96.0 for the unchanged execution boundary and carries clean 1.96.0 evidence into 1.97.0 without resetting proven work.
+* Adds lifecycle safety: deactivation retires only exact YPerf-owned, hash-proven Page/Object Cache drop-ins; ambiguous artifacts fail closed, while settings/evidence are preserved and reactivation never silently re-enables cache.
+* Adds an explicit deactivate/reactivate field-acceptance gate and lifecycle evidence surface for market-readiness testing.
+* Improves wp-admin accessibility with semantic tabs, arrow/Home/End keyboard navigation, visible focus, reduced-motion handling, RTL fixes and tighter narrow-viewport behavior.
+* Adds bottom-content/footer clearance so the WordPress footer cannot visually collide with YPerf surfaces on long admin screens.
+* Keeps localization claims strict: English and Russian remain the only complete packs until real PO/MO catalogs pass full parity and QA.
+
+= 1.96.0 =
+* Closes the Redis Object Cache write boundary with canonical direct-child path checks, symlink ambiguity blocking, exact post-write read-back and exact-artifact rollback authority.
+* Authenticates persistent Redis cache payloads with a WordPress-secret-derived HMAC before unserialization, and marks legacy unauthenticated YPerf Object Cache drop-ins for explicit rollback/reactivation instead of silently claiming them current.
+* Adds stale pending-activation recovery: abandoned Object Cache verification is automatically rolled back on the next request and backed by a bounded WordPress cron watchdog without flushing Redis.
+* Fixes Origin Budget truth: an existing PHP-FPM `pm.max_children` is adoptable only when it fits inside the conservative CPU/memory review ceiling; otherwise the contract remains fail-closed and requires host review.
+* Bounds semantic invalidation to 200 same-origin URLs, prioritizes exact local resource/term identities, caps candidate processing/deduplication state, and preserves YPerf as the only purge executor.
+* Carries forward proven Page Cache authority directly from compatible 1.94.0/1.95.0 evidence because the portable Page Cache execution runtime is unchanged; runtime/performance evidence is not carried through an already-active Object Cache boundary.
+* Adds the 1.96.0 execution/security closeout evidence package; public penetration/adversarial testing and human live acceptance remain separate explicit gates.
+
+= 1.95.0 =
+* Adds a read-only local PhpRedis evidence path for Persistent Object Cache readiness when a current Host Inspector snapshot is unavailable.
+* Proves Redis reachability, bounded maxmemory, eviction policy, headroom, logical-database isolation and current DB sizes without scanning keys or modifying Redis.
+* Keeps Object Cache activation human-governed and fail-closed: R1 reserves only local WordPress state, R2 freezes the exact contract, and R3 still performs live empty-DB verification, bounded round-trip proof, Runtime Acceptance and automatic rollback.
+* Shows whether Object Cache evidence came from Host Inspector or the local PhpRedis probe.
+* Carries forward compatible clean 1.94.0 Runtime/Benchmark evidence and proven Page Cache authority because this release does not change the Page Cache execution runtime.
+* Updates Russian translation parity for the new Redis evidence surface.
+
+= 1.94.0 =
+* Reconciles Site Readiness with proven YPerf Page Cache execution: a successful YPerf-owned MISS → HIT proof now counts as a proven optimization instead of leaving the dashboard at a contradictory 50% / proof-pending state.
+* Proves the frontend-overhead control from the Page Cache MISS execution path when that response carries the YPerf frontend marker, so a later cache HIT no longer hides valid origin execution evidence.
+* Reworks repeat-HIT stability into seven bounded hot-cache HIT samples without a purge between samples; this measures the actual repeat-delivery path instead of repeatedly recreating a cold MISS → HIT pair.
+* Adds robust typical-variation evidence using median absolute deviation while retaining full min/max range for diagnostics.
+* Makes the browser campaign runner follow the server-declared next step dynamically, eliminating the hard-coded three-sample client sequence.
+* Carries forward clean 1.93.3 Runtime/Benchmark evidence and proven Page Cache authority because the portable cache runtime itself is unchanged; the new stability methodology is opt-in via Re-prove.
+
+= 1.93.3 =
+* Gives `Stabilize public delivery` / `Re-prove delivery stability` an immediate visual acknowledgement before any server round-trip.
+* Paints the progress surface and active preflight phase before starting the AJAX campaign request, eliminating the apparent frozen-click gap on slow wp-admin requests.
+* Carries forward compatible clean 1.93.2 evidence and proven Page Cache metadata because this patch changes only admin interaction timing, not runtime/cache semantics.
+* Allows the unchanged 1.93.2 YPerf Page Cache drop-in to remain proof-compatible with 1.93.3 until the next intentional runtime write boundary.
+
+= 1.93.2 =
+* Fixes the Page Cache campaign false negative where a YPerf-owned cache HIT bypassed WordPress as designed but Runtime Acceptance did not recognize that local hot path for origin-only controls.
+* Treats YPerf `HIT` and `HIT-WAIT` as cache-served samples, records exact failed Runtime checks before rollback, and verifies the restored runtime state after rollback.
+* Ignores stale campaign REVIEW state from an earlier patch and carries forward only clean 1.93.1 evidence.
+
+= 1.93.1 =
+* Adds guided Public Delivery Stability with safe YPerf Page Cache activation, MISS → HIT proof, repeat-HIT sampling, final Runtime Acceptance and automatic rollback for new activations.
+* Surfaces cached-HIT stability evidence and a live four-phase campaign UI.
+* Routes the next safe step to Page Cache stability after migration/local-profile acceptance, and prevents competing native page-cache authority while the portable executor is active.
+
+= 1.92.2 =
+* Post-handover reconciliation patch: detects and safely retires a residual W3TC-owned advanced-cache.php after provider deactivation, with exact local backup, read-back verification, Runtime Acceptance and automatic rollback.
+* Guided Migration Step 5 remains active until provider-owned drop-in cleanup is complete; stale provider artifacts can no longer be hidden by active-plugin-only detection.
+* Future W3TC handovers reconcile advanced-cache.php inside the same protected transaction and rollback restores it before reactivating W3TC.
+* Production readiness now treats Host Intelligence as optional for local/core control-plane health and mandatory only for native host/FPM operations, matching the dashboard evidence contract.
+
+= 1.92.1 =
+* Makes the W3TC Cloudflare integration conditional rather than an unconditional migration blocker: when current Runtime Acceptance proves Cloudflare HTML is DYNAMIC and W3TC CDN / Full-site Delivery are off, the integration is safe to retire with the provider.
+* Preserves the blocker when Cloudflare execution is active/unknown or W3TC still owns a delivery path.
+* Aligns paired Guided Migration Step 4 action buttons across responsibility cards.
+* Keeps provider-owned advanced-cache.php automatic and protected by the transactional handover.
+
+= 1.92.0 =
+* Guided Migration Step 4 now resolves its two current human blockers inside YPerf instead of only telling the administrator to leave the workflow and edit W3TC manually.
+* Full-site Delivery retirement is explicit and bounded: YPerf snapshots the relevant W3TC state, switches only `cdnfsd.enabled` off, saves, reads the state back and restores the previous values if verification fails.
+* Cloudflare retirement disconnects only the W3TC Cloudflare extension activation while preserving Cloudflare DNS/proxy, the Cloudflare zone and saved W3TC Cloudflare settings; Full-site Delivery must be retired first when it depends on Cloudflare.
+* Step 4 actions report visible live progress in the same guided panel and automatically rebuild the gate after a verified change.
+* Final handover rollback now restores any W3TC responsibility switches retired during Step 4 before returning authority to the legacy provider.
+* advanced-cache.php remains protected and is reconciled only by the existing transactional handover.
+
+= 1.91.1 =
+* Compliance/security patch: removes the nonce-verification false positive around the guided Migration return-tab value by reading it only inside the already nonce-verified form handler and passing the validated tab explicitly into the campaign runner.
+* Removes the AJAX-side mutation of `$_POST` that was previously used only to steer the guided baseline back to Migration; the return target is now an explicit internal argument.
+* No migration gate, provider responsibility, performance profile or runtime behavior is relaxed by this patch.
+* Aligns the top Migration Readiness meter with the guided handover contract: W3TC-owned advanced-cache.php remains blocked for blind/manual removal but counts as handover-managed in the guided path, so the meter can reach 100% once the actual human decisions are resolved.
+
+= 1.91.0 =
+* Guided Migration actions now stay inside the active step: evidence refresh, baseline Apply & Prove, provider-responsibility recheck and final handover each expose visible progress and terminal state.
+* Adds a sticky Migration Companion with current-step guidance, live action status and the safety contract, using the previously empty secondary desktop canvas.
+* Step 2 no longer reloads the whole admin page when launched from Migration; current evidence and guided-step state are refreshed in place.
+* Step 3 gains a backend-truthful five-phase progress ledger: fresh preflight, local Apply, Runtime proof, regression guard and accept/rollback.
+* Step 4 reviews Full-site Delivery, Cloudflare Extension and provider-owned advanced-cache.php inline, links to the exact legacy-provider surfaces when a human decision is required, and rechecks the gate in place.
+* Step 5 surfaces the protected transactional handover console directly in the guided step while keeping deep technical evidence optional below.
+* Refreshes the gettext catalog after the migration/model-control work and keeps the Russian pack at full key parity for the 1.91.0 UI.
+
+= 1.90.0 =
+* Adds Migration as a first-level YPerf workspace instead of burying provider replacement under Setup.
+* Introduces a five-step guided journey: detect source → prove current site → activate a safe YPerf baseline → resolve legacy responsibilities → transactional handover and verification.
+* Keeps exactly one migration step current at a time and embeds the next safe action directly in the Migration Center, including read-only evidence refresh and safe-profile Apply & Prove.
+* Moves the provider gate, blocker matrix, handover console, rollback evidence and MU inventory into collapsible technical details on the same Migration screen.
+* Routes Site Readiness migration sites to Continue guided migration after evidence is current, while preserving generic Site Readiness semantics.
+* Preserves legacy setup:migration deep links by routing them to the new first-level Migration workspace.
+* Adds return-to-Migration behavior after guided profile Apply so users do not have to hunt through unrelated tabs.
+
+= 1.86.1 =
+* Compliance-only patch: shortens the WordPress.org 1.86.0 upgrade notice to stay within the 300-character limit. No runtime, evidence, migration or UI behavior changes.
+
+= 1.86.0 =
+* Readiness clarity: labels Runtime Acceptance explicitly and shows completed site stages.
+* Migration context: surfaces W3TC migration readiness separately from Site Readiness.
+* Evidence refresh UX: adds live three-phase status, animated activity, completion state and post-reload confirmation.
+
+= 1.85.2 =
+* Fixes live Text model search: the JavaScript filter was correctly setting the HTML hidden state, but the model-row author CSS `display:flex` overrode that browser-hidden presentation, leaving non-matching rows visible.
+* Adds a scoped hidden-state rule for the model picker so queries such as Grok, Claude and GPT immediately show only matching model labels/IDs without changing selection or account-catalog semantics.
+
+= 1.85.1 =
+* Polishes the Yablonsky AI control surface: the API-key field gets deliberate spacing, model selection and Apply share one compact row, and secondary catalog explanation moves into existing context help.
+* Makes the searchable model menu viewport-aware: it opens above or below as space allows, stays bounded inside the browser window and keeps the result list scrollable.
+* Reclassifies the verified account catalog on every local read so obvious image/video-only model families are not presented as text-model choices.
+* Improves model display labels for common AI acronyms without changing provider model IDs.
+* Fixes the two Plugin Check MissingTranslatorsComment errors introduced by the Auto workspace-model label.
+
+= 1.85.0 =
+* Adds a searchable Yablonsky AI text-model picker populated from the verified workspace plan catalog instead of a frozen plugin list.
+* Makes Auto explicit by showing the current workspace Writer model; manual model selections are persisted locally and sent explicitly with every YPerf AI request.
+* Uses the reviewed conversation + message SSE transport for manual model execution while preserving the existing Writer transport for Auto.
+* Adds a live W3 Total Cache handover console with five visible phases, truthful backend progress, event history and terminal success/rollback states.
+* Keeps migration transactional: preflight remains read-only; failed post-handover proof restores YPerf changes and reactivates W3 Total Cache.
+* Preserves an OFF Page Cache source intent during migration instead of enabling YPerf Page Cache unless that responsibility actually requires replacement.
+
+= 1.81.0 =
+* Adds accessible progressive context help across the most information-dense repeated YPerf surfaces: hover/focus shows help, click pins it, outside click/Escape closes it, and touch uses the same explicit control.
+* Keeps state, blockers, values and next actions visible while moving secondary explanation out of the permanent canvas, starting with Site Readiness, AI Advisor credits/actions and Performance Autopilot.
+* Compacts the repeated Site Readiness stage row by moving stage descriptions behind help controls without reducing typography below the 1.80.2 readability floor.
+* Reduces Optimize visual noise by moving AI disclosure, credit semantics and read-only action explanations into readable 14px context popovers while preserving human-approval and privacy boundaries.
+* Adds viewport-aware floating help placement so context panels are not clipped by dashboard cards, grids or scroll containers; RTL and narrow admin layouts remain supported.
+
+= 1.80.2 =
+* Restores a deliberate wide-screen two-column Optimize composition without implicit-grid behavior: AI Advisor keeps a protected primary column and Performance Autopilot remains visible in a bounded secondary column; narrower screens collapse cleanly to one column.
+* Adds an accessibility typography floor for meaning-bearing YPerf admin text, including Site Readiness descriptions, evidence freshness, flow labels, card helper text, credit labels and other previously sub-12px copy.
+* Hardens the unified read-only evidence refresh so completion is accepted only after Environment, Runtime Acceptance and Benchmark reports are returned and current-version Runtime/Benchmark evidence is confirmed.
+* Forces a cache-busted admin reload after a verified refresh and removes the temporary reload token from the visible URL.
+
+= 1.80.1 =
+* Fixes the Optimize Recommended desktop regression where a legacy `grid-column:2!important` forced Performance Autopilot into an implicit second column after the layout had intentionally moved to one full-width column.
+* Restores sequential full-width AI Advisor → Performance Autopilot cards so credit balances and disclosure text use the actual available canvas instead of a squeezed pseudo-sidebar.
+* Cleans contradictory dashboard URLs by dropping a stale `yperf_section` when switching to a different top-level tab.
+
+= 1.80.0 =
+* Adds a unified read-only Environment → Runtime Acceptance → Benchmark refresh train with one progress indicator.
+* Makes Environment, Runtime, Benchmark and Host Intelligence freshness explicit in Site Readiness.
+* Shows Benchmark in the five-source reconciliation grid and separates missing Redis host proof from actual Redis reachability.
+* Closes the remaining Optimize/Setup phantom-column and unequal-content layout defects.
+
+= 1.79.0 =
+* Final visual symmetry closeout for content-rich Optimize and Setup surfaces.
+
+= 1.78.0 =
+* Evidence freshness and complete five-source reconciliation UI.
+
+= 1.77.0 =
+* Unified bounded read-only evidence refresh orchestration.
+
+= 1.76.0 =
+* Honest Redis host-proof semantics when no Host Intelligence snapshot is loaded.
+
+= 1.75.0 =
+* Credit truth closeout: separates total spendable credits, remaining monthly plan credits and non-expiring Usage credits in the verified Yablonsky AI account view.
+* Adds an explicit read-only account-balance refresh without model execution.
+* Fixes the high-specificity equal-height regression across paired admin cards and removes remaining phantom half-columns.
+
+= 1.74.0 =
+* Removes phantom half-columns from release/language and environment layouts.
+
+= 1.73.0 =
+* Makes the body-scoped YPerf card rule compatible with equal-row stretching.
+
+= 1.72.0 =
+* Adds explicit read-only balance reconciliation for verified Yablonsky AI accounts.
+
+= 1.71.0 =
+* Stores and labels credit_count, subscription.credit_count and total_credit_count according to their distinct billing semantics.
+
+= 1.70.0 =
+* Visual symmetry contract: paired Optimize, Setup, Insights, Diagnostics and Advanced cards now share consistent 12px gaps and equal row heights; Provider ownership spans the full row and solitary R3 cards no longer leave a phantom half-column.
+* Yablonsky AI User API contract: replaces the stale empty-contract gate with the reviewed account + Writer contract for ai.yablonsky.io using X-Api-Key, X-Workspace-Id and bounded SSE multipart compute.
+* Explicit connection proof: adds a read-only Verify AI connection action; no remote request occurs merely from saving the key or opening wp-admin.
+* Workspace-aware AI readiness: a fresh verified account/current-workspace round-trip is required before AI Advisor compute; key rotation invalidates old account proof.
+* AI transport hardening: no redirects with credentials, Yablonsky-owned HTTPS allow-list, 1 MiB response cap, bounded timeout and robust SSE/JSON text extraction.
+* Human authority preserved: remote AI can only advise within the existing deterministic profile ceiling; Apply still requires explicit approval, fresh Runtime Acceptance and rollback protection.
+
+= 1.65.0 =
+* Closes the operation-proof release train with Performance Intelligence schema 20 and latest purge execution evidence in the local export.
+* Keeps all operation evidence local, bounded and independent of optional AI.
+
+= 1.64.0 =
+* Control Center now surfaces purge provider/timing evidence and bounded prewarm HIT proof without adding another long dashboard section.
+* The compact telemetry strip exposes verified prewarm HIT activity while preserving the one-screen dashboard rhythm.
+
+= 1.63.0 =
+* Extends local telemetry with purge confirmation/failure/duration metrics and prewarm verified-HIT/request/average-time metrics.
+* Telemetry schema advances to 5 while retaining the same bounded 120-event local history.
+
+= 1.62.0 =
+* Upgrades bounded prewarm from a successful HTTP request to execution-aware warming: when YPerf Page Cache returns MISS, one sequential follow-up request verifies HIT/HIT-WAIT.
+* Prewarm report schema 2 records first/verify timing, request count, cache signals and verified HIT state while retaining the 12-URL cap.
+
+= 1.61.0 =
+* Adds execution evidence to local purge operations: duration, provider confirmation and YPerf Page Cache deleted-file counts.
+* YPerf-owned page-cache purge methods now return bounded effect summaries without changing their semantic invalidation hooks.
+
+= 1.60.3 =
+* Stops overriding WordPress footer offsets and restores the core wpbody-content footer reserve.
+* YPerf now owns only its admin content canvas; WordPress keeps menu/footer shell geometry, including collapsed-menu and RTL behavior.
+
+= 1.60.2 =
+* Fixes the Optimize profile selector layout so radio controls keep a dedicated gutter instead of overlapping Observe / WordPress performance profile titles.
+* Preserves the compact dashboard rhythm introduced in 1.50.0 while restoring the original activation-card alignment contract.
+* Adds the equivalent right-side gutter for RTL admin locales.
+
+= 1.60.1 =
+* Fixes a canonical-bootstrap omission that caused the admin page to terminate while rendering W3TC migration controls.
+* Restores top-level tabs and dashboard subtabs by allowing the admin document and footer JavaScript to render completely.
+* Normalizes Overview vertical rhythm and enforces equal-height Runtime Acceptance / Current Stack cards on wide screens.
+* Adds a bootstrap-completeness release gate: every class-yperf PHP module in the package must be explicitly loaded by the canonical bootstrap.
+
+= 1.60.0 =
+* Backend-corrective release train: real YPerf Page Cache executor, Browser Cache policy, transactional controls and execution proofs.
+* Adds bounded cold-key stampede protection to the YPerf page-cache drop-in.
+* Control Center now separates YPerf-owned executable controls from detected/external capabilities.
+* Adds transactional W3 Total Cache handover assessment, migration proof and rollback path.
+* Wires Object Cache prepare/activate/rollback actions into Control Center.
+* Runtime Acceptance can prove YPerf Page Cache and Browser Cache execution.
+* Fixes field-acceptance request sanitization reported by Plugin Check.
+
+Yablonsky Performance — Changelog
+
+= 1.50.1 =
+* Feature-freeze production candidate for MonParle field acceptance.
+* Rebuilds the admin into compact dashboard-first thematic sections with progressive disclosure.
+* Replaces internal development percentages with site-readiness stages: Scan → Prove → Optimize → Production.
+* Adds read-only MU Plugin Inventory and version/site-bound Field Acceptance Center for controlled migration.
+* Removes the discouraged manual plugin-textdomain loader call while retaining bundled-translation compatibility for supported pre-6.8 WordPress installs.
+* Hardens Yablonsky AI so endpoint, authentication header and prefix must all come from the reviewed Yablonsky service contract; no wire format is guessed.
+* Freezes the active gettext catalog and strengthens localization integrity checks.
+* Keeps local performance functionality free, local-first and independent of optional Yablonsky AI remote compute.
+
+Historical changelog
+--------------------
+= 1.50.1 =
+* Finalizes the causal-compact-v2 admin layout contract and consolidates the 1.31→1.40 train.
+* Keeps roadmap implementation, multilingual completion and live server proof as separate visible progress truths.
+
+= 1.39.0 =
+* Replaces the hard-coded complete-locale list with manifest-backed real PO/MO verification for future language packs.
+* Synchronizes manifest gettext-key truth with the current catalog.
+
+= 1.38.0 =
+* Adds responsive card-header, status-pill, form-control and text-overflow collision hardening.
+
+= 1.37.0 =
+* Rebuilds Insights and Diagnostics around independent vertical stacks to eliminate CSS-grid row gaps caused by unequal card heights.
+
+= 1.36.0 =
+* Rebuilds Setup into two independent causal stacks so uneven modules remain adjacent without phantom whitespace.
+
+= 1.35.0 =
+* Adds a multilingual release card showing real complete/remaining language counts and the no-fake-pack quality rule.
+
+= 1.34.0 =
+* Adds independent micro progress bars for core implementation, languages and Generator.pw live closeout.
+
+= 1.33.0 =
+* Adds a compact persistent product roadmap/status bar with next-safe-step routing.
+
+= 1.32.0 =
+* Adds the Evidence → Advice → Approval → Proof flow and places AI Advisor beside Local Autopilot on wide screens.
+
+= 1.31.0 =
+* Establishes one spacing rhythm and prevents cards from stretching into uneven grid rows.
+* Removes obsolete rejected AI-authority wording from historical package text.
+
+= 1.30.0 =
+* Adds a final train gate proving Yablonsky-AI-only authority, zero AI hot-path calls, local-first behavior, explicit remote compute, free local features, profile-only AI write authority, Runtime Acceptance and rollback.
+
+= 1.29.0 =
+* Blocks AI transmission when the minimized evidence exceeds 64 KiB or contains forbidden credential, identity, URL/path or raw-SQL key classes.
+
+= 1.28.0 =
+* Adds machine-readable checks for credential presence, HTTPS, Yablonsky-owned host authority, explicit calls, free local features and substantive remote compute.
+
+= 1.27.0 =
+* Stores the exact YPerf-owned local changes, write scope and rollback requirement alongside each AI plan before Apply.
+
+= 1.26.0 =
+* Adds a local Idle Budget read model proving zero AI frontend calls and zero automatic AI dashboard calls while reporting active local controls.
+
+= 1.25.0 =
+* Keeps the latest ten explicit Ask AI Advisor exchanges per administrator, with bounded text and evidence fingerprints only.
+
+= 1.24.0 =
+* Adds evidence fingerprint and expiry enforcement so stale AI advice cannot remain an executable plan after the site changes.
+
+= 1.23.0 =
+* Adds a strict AI response allow-list, length bounds and profile-selection-only authority marker before local safety validation.
+
+= 1.22.0 =
+* Adds a six-hour bounded Yablonsky AI account/model cache; discovery never runs on normal dashboard or frontend requests.
+
+= 1.21.0 =
+* Establishes the canonical Yablonsky AI-only service boundary for AI Advisor.
+* Adds an encrypted server-side account-scoped Yablonsky AI credential vault; the raw key is never shown back.
+* Adds a reviewed-public-contract gate so YPerf never guesses production AI endpoint names.
+* Keeps every local/self-hosted performance capability fully usable without AI.
+
+= 1.20.0 =
+* Introduced the early AI Advisor surface. The current product contract supersedes this history: YPerf uses Yablonsky AI only and never delegates provider authority to the WordPress platform.
+* Builds a privacy-minimized evidence envelope that excludes URLs, hostnames, IPs, filesystem paths, raw SQL, logs, content, cookies, nonces, credentials, tokens and API keys.
+* Adds structured AI profile recommendations constrained to Observe, WordPress Safe Performance or WordPress + WooCommerce Performance.
+* Adds a deterministic local safety ceiling so AI can never authorize a broader profile than current YPerf evidence allows.
+* Adds explicit human review with exact allowed changes before AI-assisted Apply.
+* Re-runs fresh Runtime Acceptance and the deterministic safety gate immediately before AI-assisted writes, retaining automatic rollback on failure or confirmed regression.
+* Adds read-only Ask AI Advisor for site-specific performance questions.
+* Documents the external-service boundary required for WordPress.org: no automatic AI calls; Yablonsky AI remains the only AI service authority.
+* Keeps manual configuration and Local Autopilot fully functional without AI.
+* Keeps the local-first / no vendor runtime CDN boundary for YPerf CSS, JavaScript and fonts.
+
+= 1.19.0 =
+* Adds the canonical YPerf admin-locale registry for the combined Internet/EU/Ukrainian language scope.
+* Loads plugin translations from the current WordPress administrator locale at the safe init boundary.
+* Ships complete Russian admin translation coverage for the current YPerf gettext surface, including plural handling and placeholder validation.
+* Localizes the remaining JavaScript host-snapshot notices through the WordPress text domain.
+* Adds RTL layout hardening for Arabic-compatible WordPress admin direction.
+* Adds translation-source POT and machine-readable locale coverage manifest.
+
+= 1.18.0 =
+* Renames the maximum local profile to `WordPress + WooCommerce Performance`; WooCommerce Protection remains the added bounded capability, not the profile name.
+* Resolves the Plugin Check global-prefix warning for the intentional WordPress core `SAVEQUERIES` probe constant with a narrowly scoped PHPCS justification.
+* Adds a stricter Mature v2 Closeout gate with execution-lane progress, open-item reporting and an evidence fingerprint.
+* Advances Performance Intelligence to schema 19.
+
+= 1.17.0 =
+* Fixes probe-bounded Origin Cost capture by enabling WordPress SAVEQUERIES only inside a signed YPerf Runtime Acceptance request instead of relying on a non-portable wpdb property.
+* Adds an explicit telemetry state when SAVEQUERIES is hard-disabled by site configuration.
+* Adds Persistent Object Cache R3: exact-contract activation of a YPerf-owned Redis object-cache.php, read-back hash proof, drop-in runtime Redis proof, bounded Redis write/read/delete health proof, Runtime Acceptance and automatic rollback on failure.
+* YPerf Object Cache never uses FLUSHDB; site isolation uses a reserved Redis logical database, site-specific namespace and generation-based invalidation.
+* Adds Origin Budget R3 native-first adoption: an already-bounded PHP-FPM max_children can become the authoritative YPerf Origin Budget without rewriting or reloading PHP-FPM; later host drift invalidates the authority.
+* Adds Host Intelligence schema 6 / Host Inspector 1.5.0 support for the mapped pool memory_limit so the 256M control-plane hardening can be read back explicitly.
+* Extends Performance Intelligence to schema 18 and Runtime Acceptance to schema 5.
+
+= 1.16.0 =
+* Makes signed Origin Cost telemetry persist before frontend response completion and adds bounded consume retry for reliable per-route DB evidence.
+* Correlates upgrader lifecycle events by request ID so a blank/failed update response is not confused with another admin request.
+* Expands Engineering Release Gate with an explicit Origin Cost evidence gate and finish-line execution-lane visibility.
+* Keeps all host writes explicit: no automatic memory-limit, PHP-FPM, Nginx, Redis or provider changes.
+
+= 1.15.0 =
+* Adds Control Plane Reliability R1, combining current Runtime Acceptance, wp-admin fatal/memory evidence, host load/memory and mapped PHP-FPM worker reserve.
+* Adds Persistent Object Cache R2 with a deterministic Redis target/prefix/drop-in activation and rollback contract. No drop-in or Redis key is created in this release.
+* Adds Origin Budget R2 with a deterministic PHP-FPM before-state fingerprint, explicit control-plane worker reserve and conservative review envelope. No FPM file is edited or service reloaded.
+* Adds an Engineering Release Gate that deliberately keeps official WordPress Plugin Check as an independent manual acceptance dimension.
+* Extends Performance Intelligence to schema 15 with control_plane_readiness, persistent_object_cache_operation_contract, origin_budget_operation_contract and release_readiness.
+* Keeps server writes locked; later releases may cross only explicit, contract-bound local write paths with read-back, acceptance and rollback.
+
+= 1.14.1 =
+* Defers signed Runtime Acceptance origin telemetry until WordPress pluggable functions are available, preventing early-bootstrap probe fatals.
+* Adds a fail-safe wp_salt availability guard to probe authorization.
+* When a signed probe returns HTTP 5xx, performs one bounded unsigned control request so Runtime Acceptance can distinguish instrumentation failure from a genuinely broken public frontend.
+
+= 1.14.0 =
+* Adds Persistent Object Cache Adoption R1 with Redis headroom, isolation, drop-in ownership and benchmark gates.
+* Adds a local-only Redis logical-database reservation step; it creates no Redis keys and writes no object-cache.php file.
+* Adds Origin Budget R1 with exact PHP-FPM pool worker RSS evidence and capacity-readiness analysis.
+* Adds Native Page Cache Operations R3 operation-contract fingerprints without enabling host writes.
+* Extends Host Intelligence to schema 5 and Performance Intelligence to schema 14.
+
+= 1.13.0 =
+* Adds Native Page Cache Operations R2 with cache-zone ownership proof and operation-readiness gates.
+* Adds Host Intelligence schema 4 support and Host Inspector 1.3.0 compatibility.
+* Blocks future native purge planning when a FastCGI cache zone is shared by multiple server blocks.
+* Exports only privacy-minimized ownership fingerprints rather than unrelated virtual-host names.
+* Extends Performance Intelligence to schema 11 with native_page_cache_operations.
+
+
+= 1.12.0 =
+* Clarifies profile hierarchy: Observe → WordPress Safe Performance → WordPress + WooCommerce Performance.
+* Adds Native Page Cache Adoption R1 for explicit local recognition of fresh proven Nginx FastCGI execution without host writes.
+* Adds adoption state and proof authority to Performance Intelligence schema 10.
+* Adds Host Intelligence schema 3 support for cache-zone and native purge-capability evidence.
+
+= 1.11.0 =
+* Extends Plugin Install / Update Health into Control Plane Reliability schema 2.
+* Adds current PHP memory ceiling, WordPress memory targets, active-plugin count and request-headroom classification.
+* Correlates upgrader hooks and shutdown events with a bounded local request ID.
+* Monitors update.php, plugins.php, plugin-install.php and the Plugin Check screen for fatal/resource evidence.
+* Classifies memory exhaustion separately from generic PHP fatals without storing the raw fatal message.
+* Records safe header/output-buffer metadata without capturing response bodies, query strings or nonces.
+* Exports the expanded evidence through Performance Intelligence schema 9.
+* Does not raise PHP memory, alter cache rules, modify WordPress upgrader behavior or write host configuration.
+
+= 1.10.0 =
+* Adds bounded read-only Plugin Install / Update Health evidence for wp-admin/update.php and core upgrader hooks.
+* Captures response code, peak memory, safe cache headers and fatal metadata without storing query strings, nonces, response bodies or raw error messages.
+* Exports control-plane upgrade evidence in Performance Intelligence schema 8.
+* Does not change WordPress upgrader behavior, cache configuration or host services.
+
+= 1.9.0 =
+* Adds Provider Exit Gate for W3 Total Cache migration safety.
+* Requires a current clean Runtime Acceptance before a provider can be considered removable.
+* Treats active W3TC layers, Cloudflare integration and W3TC-owned drop-ins as explicit removal blockers.
+* Distinguishes ready, retire-safe, replacement-proven and blocked migration responsibilities.
+* Adds provider-exit readiness progress and blocker matrix to Setup.
+* Exports evidence-aware migration state through Performance Intelligence schema 7.
+* Does not deactivate, delete or rewrite the provider automatically.
+
+= 1.8.0 =
+* Hardens feature-tile badge wrapping so long state text cannot spill into a neighboring tile.
+* Shortens the Fragment Cache unconfigured badge copy to reduce visual overflow pressure.
+* Adds a full-width Next Safe Step card on Overview to explain the best operator action based on current runtime and activation state.
+* Keeps the dashboard on the current YPerf identity and stable local-only safety boundary.
+
+= 1.7.0 =
+* Added Performance Autopilot for safe local-only activation.
+* Added bounded Runtime History with route baselines and stability signals.
+* Added conservative two-pass Regression Guard with automatic rollback on repeated material regressions.
+* Added Optimization Campaign audit trail and Intelligence export.
+
+= 1.6.0 =
+* Adds cryptographically signed Runtime Acceptance probe telemetry with no normal-traffic query-recording overhead.
+* Measures per-route query count, aggregate database time, slow queries, query families and SQL_CALC_FOUND_ROWS use without exporting raw SQL.
+* Adds Origin Cost summary to Overview, Runtime Acceptance schema 4 and Performance Intelligence schema 5.
+* Promotes Query Cost Telemetry from planned to a working local-free capability.
+* Adds evidence-driven recommendations when origin query cost is materially high.
+* Adds bounded state-recovery v2 for meaningful historical Runtime/Benchmark/Host evidence shadowed by empty canonical placeholders.
+
+= 1.5.0 =
+* Standardizes the internal namespace on `Yablonsky\Performance`, `YPERF_*`, `yperf_*` and `yperf-*` identifiers.
+* Renames Runtime Acceptance and Performance Intelligence downloads to `yperf-runtime-acceptance-*` and `yperf-performance-intelligence-*`.
+* Adds a bounded one-time state migration from historical `ypc_*` option keys to canonical `yperf_*` keys so existing reports, profile state and telemetry survive the rename.
+* Canonicalizes semantic invalidation hooks to `yablonsky_performance_*` while retaining legacy input aliases for existing YMulti/YSEO builds.
+* Fixes the Plugin Check unescaped-output error in the performance-plan preview.
+* Marks Runtime Acceptance from an earlier YPerf version as needing recheck before it can count as the current runtime gate.
+* Marks failed 5xx benchmark records as incident evidence rather than a valid current performance baseline.
+* Extends Performance Intelligence evidence metadata with version relation, quality and current-usability state.
+
+= 1.4.0 =
+* Adds Effective Performance state that distinguishes ACTIVE execution proof from ARMED configuration and NOT PROVEN detection.
+* Adds Runtime Acceptance proof steps for the YPerf frontend control and eligible WooCommerce first-hit protection.
+* Adds proof-aware visibility for PHP OPcache, HTML compression, page cache, object cache and edge HTML cache.
+* Adds Last Activation Proof with exact local settings diff, acceptance outcome and observed request-timing deltas.
+* Adds exact profile-change previews before Apply.
+* Makes wp-admin viewport ownership explicit at `#wpcontent` / `#wpbody-content` level for true adaptive full-width layout.
+* Removes live legacy-runtime migration/deletion behavior from the canonical plugin bootstrap.
+* Extends Performance Intelligence with effectiveness and optimization-outcome evidence.
+
+= 1.3.2 =
+* Isolated canonical code loading to `yablonsky-performance/` using immutable local paths.
+* Completed the production transition from the historical directory to the canonical package identity.
+
+= 1.3.1 =
+* Hardened canonical-directory reconciliation and Plugin Check compliance.
+* Expanded adaptive admin viewport ownership.
+
+= 1.3.0 =
+* Added canonical package identity, Optimize surface and local performance profiles.
+* Added explicit Apply with Runtime Acceptance and rollback.
+
+= 1.2.0 =
+* Added Evidence Reconciliation, Drop-in Ownership and Native Runtime Proof.
+* Added Redis pressure classification and site-specific native adoption evidence.
+
+= 1.1.1 =
+* Fixed strict input sanitization for Host Intelligence JSON import.
+
+= 1.1.0 =
+* Added optional read-only Host Intelligence and native adoption planning.
+
+= 1.0.0 =
+* First stable Yablonsky Performance release.
