@@ -194,11 +194,11 @@ final class Prewarm
         }
         $code = (int) wp_remote_retrieve_response_code($response);
         return array(
-            'status' => ($code >= 200 && $code < 400) ? 'pass' : 'fail',
+            'status' => ($code >= 200 && $code < 300) ? 'pass' : 'fail',
             'http_code' => $code,
             'ms' => $ms,
             'cache' => strtoupper(sanitize_key((string) wp_remote_retrieve_header($response, 'x-yperf-cache'))),
-            'details' => ($code >= 200 && $code < 400) ? 'Warm request completed.' : 'Unexpected HTTP response.',
+            'details' => ($code >= 200 && $code < 300) ? 'Warm request completed.' : 'Unexpected HTTP response.',
         );
     }
 
