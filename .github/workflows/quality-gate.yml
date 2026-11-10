@@ -31,6 +31,8 @@ jobs:
         run: php tests/prewarm-redirect-regression.php
       - name: Cacheability same-origin redirect regression
         run: php tests/cacheability-redirect-regression.php
+      - name: Cloudflare purge same-origin regression
+        run: php tests/cloudflare-origin-regression.php
 
   js-syntax:
     name: JavaScript syntax
