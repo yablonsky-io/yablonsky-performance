@@ -33,6 +33,8 @@ jobs:
         run: php tests/cacheability-redirect-regression.php
       - name: Cloudflare purge same-origin regression
         run: php tests/cloudflare-origin-regression.php
+      - name: Admin action capability and nonce regression
+        run: php tests/admin-action-security-regression.php
 
   js-syntax:
     name: JavaScript syntax
