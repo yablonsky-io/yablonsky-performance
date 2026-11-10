@@ -63,7 +63,7 @@ final class CacheabilityInspector
             $url,
             array(
                 'timeout'             => 8,
-                'redirection'         => 0, // Do not inspect a redirected, potentially foreign origin.
+                'redirection'         => 3,
                 'sslverify'           => true,
                 'limit_response_size' => 65536,
                 'user-agent'          => 'Yablonsky-Performance/' . YPERF_VERSION . ' CacheabilityInspector',
@@ -81,7 +81,7 @@ final class CacheabilityInspector
         $code = (int) wp_remote_retrieve_response_code($response);
         $signals = self::signals(wp_remote_retrieve_headers($response));
         $attention = isset($signals['set-cookie']);
-        $status = ($code >= 200 && $code < 300) ? ($attention ? 'attention' : 'ready') : 'attention';
+        $status = ($code >= 200 && $code < 400) ? ($attention ? 'attention' : 'ready') : 'attention';
         $details = $attention
             ? 'Policy allows analysis, but the origin sets a cookie. Review before page-cache adoption.'
             : 'Policy and live response were inspected without changing cache configuration.';
