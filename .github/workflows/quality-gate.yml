@@ -74,8 +74,21 @@ jobs:
       - name: Run WPCS
         run: |
           phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*,*/tests/*' .
+      - name: Stage plugin-only tree for Plugin Check
+        if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
+        run: |
+          mkdir -p .yperf-plugincheck
+          rsync -a \
+            --exclude='.git/' \
+            --exclude='.github/' \
+            --exclude='tests/' \
+            --exclude='.yperf-plugincheck/' \
+            --exclude='.gitignore' \
+            --exclude='.gitattributes' \
+            ./ .yperf-plugincheck/
+          test -f .yperf-plugincheck/yablonsky-performance.php
       - name: Run official Plugin Check
         if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: '.'
+          build-dir: '.yperf-plugincheck'
