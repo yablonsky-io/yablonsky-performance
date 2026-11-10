@@ -210,16 +210,7 @@ final class CloudflareClient
         if (!is_array($target) || !is_array($home)) {
             return false;
         }
-        $targetScheme = strtolower((string) ($target['scheme'] ?? ''));
-        $homeScheme = strtolower((string) ($home['scheme'] ?? ''));
-        if ($targetScheme === '' || $targetScheme !== $homeScheme
-            || strtolower((string) ($target['host'] ?? '')) !== strtolower((string) ($home['host'] ?? ''))
-            || isset($target['user']) || isset($target['pass'])) {
-            return false;
-        }
-        $defaultPort = $homeScheme === 'https' ? 443 : 80;
-        $targetPort = isset($target['port']) ? (int) $target['port'] : $defaultPort;
-        $homePort = isset($home['port']) ? (int) $home['port'] : $defaultPort;
-        return $targetPort === $homePort;
+        return strtolower((string) ($target['scheme'] ?? '')) === strtolower((string) ($home['scheme'] ?? ''))
+            && strtolower((string) ($target['host'] ?? '')) === strtolower((string) ($home['host'] ?? ''));
     }
 }
