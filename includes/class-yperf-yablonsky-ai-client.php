@@ -424,7 +424,15 @@ final class YablonskyAIClient
 
     private static function urlIsYablonsky(string $url): bool
     {
+        // API credentials are scoped to the licensed AI service, not to
+        // arbitrary Yablonsky.io subdomains (which may have other operators).
+        $scheme = strtolower((string) wp_parse_url($url, PHP_URL_SCHEME));
         $host = strtolower((string) wp_parse_url($url, PHP_URL_HOST));
-        return $host === 'ai.yablonsky.io' || ($host !== '' && substr($host, -13) === '.yablonsky.io');
+        $port = wp_parse_url($url, PHP_URL_PORT);
+        $user = wp_parse_url($url, PHP_URL_USER);
+        $pass = wp_parse_url($url, PHP_URL_PASS);
+        return $scheme === 'https' && $host === 'ai.yablonsky.io'
+            && ($port === null || $port === 443)
+            && $user === null && $pass === null;
     }
 }
