@@ -1,0 +1,31 @@
+# Local secrets and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+auth.json
+credentials.json
+secrets.*
+*.log
+*.sql
+*.sqlite
+*.sqlite3
+*.bak
+*.swp
+.DS_Store
+
+# Build/test outputs and generated worksets
+node_modules/
+vendor/
+coverage/
+.phpunit.result.cache
+.phpunit-watcher.yml
+phpcs-report.*
+*.zip
+*.tar.gz
+*_WORKSET*
+*_HANDOFF*
+QA_REPORT*
