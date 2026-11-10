@@ -65,6 +65,7 @@ jobs:
         run: |
           phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*' .
       - name: Run official Plugin Check
+        if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
         uses: wordpress/plugin-check-action@v1
         with:
           build-dir: '.'
