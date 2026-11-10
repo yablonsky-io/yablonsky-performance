@@ -67,7 +67,7 @@ jobs:
           echo "$HOME/.config/composer/vendor/bin" >> "$GITHUB_PATH"
       - name: Run WPCS
         run: |
-          phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*' .
+          phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*,*/tests/*' .
       - name: Run official Plugin Check
         if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
         uses: wordpress/plugin-check-action@v1
