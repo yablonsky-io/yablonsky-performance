@@ -29,6 +29,8 @@ jobs:
           find . -name '*.php' -type f -print0 | xargs -0 -n1 php -l
       - name: Prewarm same-origin redirect regression
         run: php tests/prewarm-redirect-regression.php
+      - name: Cacheability same-origin redirect regression
+        run: php tests/cacheability-redirect-regression.php
 
   js-syntax:
     name: JavaScript syntax
