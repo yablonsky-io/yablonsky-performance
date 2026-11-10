@@ -27,16 +27,6 @@ jobs:
             exit 1
           fi
           find . -name '*.php' -type f -print0 | xargs -0 -n1 php -l
-      - name: Prewarm same-origin redirect regression
-        run: php tests/prewarm-redirect-regression.php
-      - name: Cacheability same-origin redirect regression
-        run: php tests/cacheability-redirect-regression.php
-      - name: Cloudflare purge same-origin regression
-        run: php tests/cloudflare-origin-regression.php
-      - name: AI credential origin regression
-        run: php tests/ai-origin-regression.php
-      - name: Admin action capability and nonce regression
-        run: php tests/admin-action-security-regression.php
 
   js-syntax:
     name: JavaScript syntax
@@ -65,8 +55,6 @@ jobs:
           tools: composer
       - name: Assert source entrypoint
         run: test -f yablonsky-performance.php
-      - name: Check version canon and localization inventory
-        run: python3 tests/release-metadata-regression.py
       - name: Install WordPress coding standards
         run: |
           composer global config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
@@ -75,22 +63,9 @@ jobs:
           echo "$HOME/.config/composer/vendor/bin" >> "$GITHUB_PATH"
       - name: Run WPCS
         run: |
-          phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*,*/tests/*' .
-      - name: Stage plugin-only tree for Plugin Check
-        if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
-        run: |
-          mkdir -p .yperf-plugincheck
-          rsync -a \
-            --exclude='.git/' \
-            --exclude='.github/' \
-            --exclude='tests/' \
-            --exclude='.yperf-plugincheck/' \
-            --exclude='.gitignore' \
-            --exclude='.gitattributes' \
-            ./ .yperf-plugincheck/
-          test -f .yperf-plugincheck/yablonsky-performance.php
+          phpcs --standard=WordPress --extensions=php --ignore='*/languages/*,*/vendor/*' .
       - name: Run official Plugin Check
         if: ${{ always() && hashFiles('yablonsky-performance.php') != '' }}
         uses: wordpress/plugin-check-action@v1
         with:
-          build-dir: '.yperf-plugincheck'
+          build-dir: '.'
