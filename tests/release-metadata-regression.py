@@ -59,3 +59,18 @@ print(f"YPerf release metadata inventory: PASS version={version}; "
       f"families=36; locales=41; keys={expected_keys}; editorial_pending={pending}")
 if pending:
     print("NOTICE: Full source fill is not editorial/visual localization acceptance.", file=sys.stderr)
+if "--release" in sys.argv:
+    incomplete = [
+        pack.get("language", "?") for pack in packs
+        if pack.get("status") != "source"
+        and (
+            pack.get("editorial_acceptance") != "ACCEPTED"
+            or pack.get("wordpress_visual_acceptance") != "ACCEPTED"
+            or pack.get("rtl_visual_acceptance", "ACCEPTED") != "ACCEPTED"
+        )
+    ]
+    if incomplete:
+        raise AssertionError(
+            "External release blocked: editorial/WordPress/RTL acceptance pending for "
+            + ", ".join(incomplete)
+        )
