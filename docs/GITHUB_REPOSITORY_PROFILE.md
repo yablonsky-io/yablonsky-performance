@@ -6,11 +6,11 @@ This file records the agreed public GitHub repository profile and release-presen
 
 **Description** (paste exactly):
 
-> Local-first WordPress performance plugin: page cache, Redis, WooCommerce optimization, origin protection, Cloudflare integration and measurable results.
+> Free WordPress performance plugin with page caching, Redis object cache, WooCommerce optimization, Cloudflare integration, and origin protection.
 
 **Website:**
 
-https://yablonsky.io/performance/
+https://yablonsky.io
 
 **Topics** (GitHub topic slugs, one per entry):
 
@@ -29,7 +29,7 @@ site-speed
 optimization
 ```
 
-These topics describe actual product surfaces. Avoid unrelated tags, unsupported performance promises and vendor-specific buzzwords.
+These topics are ready to enter individually in GitHub About → Edit (press Enter after each). They describe actual product surfaces. Avoid unrelated tags, unsupported performance promises and vendor-specific buzzwords.
 
 ## Public project identity
 
