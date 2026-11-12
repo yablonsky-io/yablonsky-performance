@@ -11,11 +11,11 @@ This file tracks actual GitHub distribution packages separately from WordPress.o
 
 **Runtime code is not changed by this documentation update.** The existing functional baseline is distributed as a GitHub prerelease, not represented as WordPress.org-approved.
 
-## [2.56.0] — GitHub prerelease, 2026-11-12
+## [2.56.0] — GitHub Release, 2026-11-12
 
 The source baseline includes portable page caching, browser-cache policy, optional Redis object caching, frontend delivery and WooCommerce route awareness, Origin Survival, Runtime Acceptance, bounded prewarming, provider handover, local Autopilot, and optional AI assistance.
 
-The [GitHub prerelease](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0) now distributes the accepted 2.56.0 baseline as the WordPress-installable **yablonsky-performance-2.56.0.zip** (8,242,713 bytes; SHA-256: `cd3af61a96797934573a3f43c4ea860e9ad2a81c2a21d07b604dc514af9dd259`). The isolated package build, integrity checks, PHP syntax and official Plugin Check completed successfully. WPCS and WordPress.org publication acceptance are tracked separately. Functionality and boundaries remain defined by [readme.txt](readme.txt).
+The [GitHub Release](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0) now distributes the accepted 2.56.0 baseline as the WordPress-installable **yablonsky-performance-2.56.0.zip** (8,242,713 bytes; SHA-256: `cd3af61a96797934573a3f43c4ea860e9ad2a81c2a21d07b604dc514af9dd259`). The isolated package build, integrity checks, PHP syntax and official Plugin Check completed successfully. WPCS and WordPress.org publication acceptance are tracked separately. Functionality and boundaries remain defined by [readme.txt](readme.txt).
 
 ## Release-record policy
 
