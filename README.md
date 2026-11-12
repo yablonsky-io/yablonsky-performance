@@ -6,7 +6,7 @@ Yablonsky Performance (**YPerf**) helps WordPress site owners speed up repeat re
 
 [Product overview](https://yablonsky.io/performance/) · [WordPress plugin description](readme.txt) · [Development and release status](#release-status) · [Support](SUPPORT.md)
 
-> **Development baseline: 2.56.0.** The source tree is published for review and collaboration. A verified installation package has **not** been published as a GitHub Release. Do not treat this branch or GitHub's automatic source archives as production installation packages.
+> **Development baseline: 2.56.0.** The source tree is published for review and collaboration. An installation ZIP is now available in the [2.56.0 GitHub prerelease](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0). The accepted runtime baseline passed 25/25 executed acceptance checks with 0 failures; WordPress.org publication compliance remains a separate pending process. Do not treat GitHub's automatic source archives as WordPress installation packages.
 
 ## What YPerf does
 
@@ -73,11 +73,11 @@ The development localization inventory covers **36 language families and 41 loca
 | --- | --- |
 | Source baseline | **2.56.0** |
 | Plugin PHP header and WordPress `readme.txt` | **2.56.0** |
-| GitHub installation release | **Not yet published / not certified** |
+| GitHub installation release | **[v2.56.0 prerelease published](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0)** |
 | WordPress.org publication | **Not claimed** |
-| Release verification | **Pending complete evidence and acceptance** |
+| Installation ZIP verification | **Build, archive integrity and Plugin Check PASS**; WPCS publication review remains open |
 
-**Do not install GitHub's “Source code (zip)” as if it were the approved WordPress distribution artifact.** A release must include the verified, correctly named plugin ZIP after the agreed checks have passed.
+**[Download the 2.56.0 WordPress installation ZIP](https://github.com/yablonsky-io/yablonsky-performance/releases/download/v2.56.0/yablonsky-performance-2.56.0.zip)**. This GitHub prerelease is for controlled installation while final WordPress.org publication compliance, especially WPCS, remains pending. Do not use GitHub's automatic “Source code (zip)” archives as WordPress installation packages.
 
 [GitHub Releases](https://github.com/yablonsky-io/yablonsky-performance/releases) · [Changelog](CHANGELOG.md) · [Pre-publication guidance](docs/WORDPRESS_ORG_PREPUBLICATION_GUIDANCE.md)
 
