@@ -2,8 +2,8 @@ name: YPerf WordPress release package
 
 # A single, explicit packaging workflow. This workflow does not run on
 # unrelated documentation commits, does not mutate PHP or JS, and does not
-# reformat established source. The first published GitHub Release is a
-# prerelease until separate WordPress.org publication compliance is accepted.
+# reformat established source. A GitHub Release is a distribution channel, not WordPress.org approval.
+# Preserve exact existing release assets when presenting the release as stable.
 on:
   push:
     branches: [main]
@@ -48,43 +48,51 @@ jobs:
         uses: wordpress/plugin-check-action@v1
         with:
           build-dir: '.release-check/yablonsky-performance'
-      - name: Create a GitHub prerelease with the exact installation ZIP
+      - name: Publish the verified GitHub Release (WordPress.org review stays separate)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          if gh release view v2.56.0 >/dev/null 2>&1; then
-            echo 'Release v2.56.0 already exists; preserving its existing assets.'
-            exit 0
-          fi
           cat > /tmp/yperf-release-notes.md <<'NOTES'
-          ## Yablonsky Performance 2.56.0 — installation candidate
+          ## Yablonsky Performance 2.56.0
 
-          This is the preserved YPerf 2.56.0 functional baseline, provided as
-          a correctly structured WordPress installation ZIP for controlled
-          distribution and final WordPress.org publication preparation.
+          WordPress performance, page caching and origin protection —
+          local-first, measurable and under administrator control.
 
-          **GitHub prerelease:** Production runtime acceptance was previously
-          completed on a representative live installation (25 PASS / 0 FAIL).
-          WordPress.org publication compliance, including remaining WPCS
-          findings, is tracked separately and has not yet been claimed as PASS.
-
-          ### Core capabilities
-          - Local-first page cache, cacheability policy, invalidation and prewarm
-          - Optional Redis object cache and bounded cache ownership handover
+          ### What's included
+          - Page caching, cacheability rules, selective purge and prewarm
+          - Redis object caching with isolation and ownership safeguards
           - WooCommerce-aware frontend optimization and origin protection
-          - Runtime Acceptance, operational evidence and local Autopilot
+          - Runtime Acceptance, performance evidence and local Autopilot
           - Optional Cloudflare, W3 Total Cache and Yablonsky AI integrations
 
+          ### Verified distribution
+          The plugin's existing functional baseline was accepted on a live
+          installation with 25 PASS, 0 FAIL, 3 SKIP and 11 ATTENTION.
+          The WordPress installation ZIP was generated and integrity-checked;
+          PHP syntax and official Plugin Check completed successfully.
+
+          **WordPress.org publication:** separate review; outstanding WPCS
+          findings remain documented. A GitHub stable release does not imply
+          WordPress.org directory approval.
+
           ### Installation
-          Use **yablonsky-performance-2.56.0.zip** from the Assets section.
-          Do not use GitHub's automatically generated source-code archives as
-          WordPress installation files.
+          Download **yablonsky-performance-2.56.0.zip** from Assets below.
+          Do not use GitHub's automatic Source code archives as plugin ZIPs.
 
-          For published licensing, support, security and operating boundaries,
-          see the repository README and WordPress readme.txt.
-
-          The prerelease designation does not imply a new feature train or
-          altered runtime behavior. The plugin version remains 2.56.0.
+          SHA-256 (published asset):
+          cd3af61a96797934573a3f43c4ea860e9ad2a81c2a21d07b604dc514af9dd259
           NOTES
-          gh release create v2.56.0 dist/yablonsky-performance-2.56.0.zip             --prerelease             --target "${GITHUB_SHA}"             --title 'Yablonsky Performance 2.56.0'             --notes-file /tmp/yperf-release-notes.md
+          if gh release view v2.56.0 >/dev/null 2>&1; then
+            asset_name="$(gh release view v2.56.0 --json assets --jq '.assets[].name' | grep -Fx 'yablonsky-performance-2.56.0.zip' || true)"
+            if [ -z "$asset_name" ]; then
+              echo 'Existing release lacks the accepted ZIP: aborting promotion.'
+              exit 1
+            fi
+            gh release edit v2.56.0 --prerelease=false --title 'Yablonsky Performance 2.56.0' --notes-file /tmp/yperf-release-notes.md
+          else
+            gh release create v2.56.0 dist/yablonsky-performance-2.56.0.zip --latest \
+              --target "${GITHUB_SHA}" \
+              --title 'Yablonsky Performance 2.56.0' \
+              --notes-file /tmp/yperf-release-notes.md
+          fi
