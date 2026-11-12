@@ -2,7 +2,7 @@
 
 ## Supported versions
 
-Security updates are provided for actively maintained releases. Until the initial GitHub release is approved, no version published here should be assumed to have passed the complete production release gate.
+Security updates are provided for actively maintained releases. The 2.56.0 GitHub prerelease is distributed for controlled installation after successful packaging and Plugin Check. This is not a claim of WordPress.org approval or a guarantee across all deployments.
 
 ## Reporting vulnerabilities
 
