@@ -1,6 +1,6 @@
 # Support and project status
 
-**Yablonsky Performance (YPerf)** is a local-first WordPress performance and caching plugin. The current public GitHub source baseline is **2.56.0**; an installable ZIP is available in the [2.56.0 GitHub prerelease](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0), with WordPress.org compliance still under review.
+**Yablonsky Performance (YPerf)** is a local-first WordPress performance and caching plugin. The current public GitHub source baseline is **2.56.0**; an installable ZIP is available in the [2.56.0 GitHub Release](https://github.com/yablonsky-io/yablonsky-performance/releases/tag/v2.56.0), with WordPress.org compliance still under review.
 
 ## Start here
 
@@ -22,4 +22,4 @@ YPerf focuses on request efficiency, caching and performance evidence. Yablonsky
 
 ## Before installing
 
-Use the specific [2.56.0 installation ZIP](https://github.com/yablonsky-io/yablonsky-performance/releases/download/v2.56.0/yablonsky-performance-2.56.0.zip), not GitHub's generated source archives. The release is marked prerelease until WordPress.org publication checks are finished. See the [release-status section](README.md#release-status).
+Use the specific [2.56.0 installation ZIP](https://github.com/yablonsky-io/yablonsky-performance/releases/download/v2.56.0/yablonsky-performance-2.56.0.zip), not GitHub's generated source archives. The GitHub Release is published; WordPress.org directory approval remains a separate process. See the [release-status section](README.md#release-status).
